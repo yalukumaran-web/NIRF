@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+*.log
+*.log.err
+uploads/
+server/nirf_pdfs/
+server/nirf_dataset.json
+*.tsbuildinfo
+.DS_Store
+Thumbs.db

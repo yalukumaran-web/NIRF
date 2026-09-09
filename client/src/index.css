@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    margin: 0;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+      "Helvetica Neue", sans-serif;
+    color: #2e406f;
+    background-color: #eef4fc;
+    background-image:
+      radial-gradient(1100px 520px at -8% -12%, rgba(216, 229, 247, 0.9), transparent 55%),
+      radial-gradient(1000px 520px at 108% 8%, rgba(216, 238, 223, 0.85), transparent 55%),
+      linear-gradient(165deg, #f5f9fd 0%, #d8e5f7 46%, #eef7f1 78%, #d8eedf 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: rgba(216, 229, 247, 0.9);
+    color: #1e2a4a;
+  }
+
+  :focus-visible {
+    outline: 2px solid #4970c8;
+    outline-offset: 2px;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(73, 112, 200, 0.28);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(73, 112, 200, 0.5);
+    background-clip: content-box;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white/85 backdrop-blur rounded-2xl border border-white/70 shadow-card;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-semibold rounded-xl px-4 py-2.5 text-sm
+      transition-all duration-200 select-none cursor-pointer
+      disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none;
+  }
+
+  .btn-primary {
+    @apply btn text-white bg-gradient-to-br from-brand-600 to-brand-700 shadow-glow
+      hover:from-brand-500 hover:to-brand-600 hover:-translate-y-0.5 hover:shadow-lift
+      active:translate-y-0 active:scale-[.98];
+  }
+
+  .btn-success {
+    @apply btn text-white bg-gradient-to-br from-mint-600 to-mint-700 shadow-glow-mint
+      hover:from-mint-500 hover:to-mint-600 hover:-translate-y-0.5 hover:shadow-lift
+      active:translate-y-0 active:scale-[.98];
+  }
+
+  .btn-ghost {
+    @apply btn text-brand-900/70 bg-transparent hover:bg-brand-200/60 hover:text-brand-900
+      active:scale-[.98];
+  }
+
+  .btn-outline {
+    @apply btn text-brand-900 border border-brand-300/70 bg-white/60
+      hover:border-brand-400 hover:bg-brand-200/50 hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-brand-300/50 bg-white/90 px-3.5 py-2.5 text-sm text-brand-900
+      placeholder:text-brand-900/35 shadow-sm
+      transition-all duration-200
+      focus:border-brand-400 focus:ring-2 focus:ring-brand-400/25 focus:outline-none;
+  }
+
+  .label {
+    @apply block text-xs font-semibold text-brand-900/70 mb-1.5;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] font-medium whitespace-nowrap;
+  }
+
+  .th {
+    @apply px-4 py-2.5 text-left text-[11px] font-semibold uppercase tracking-wider text-brand-900/50;
+  }
+
+  .td {
+    @apply px-4 py-2.5 text-sm text-brand-900/80;
+  }
+
+  .tr-hover {
+    @apply transition-colors duration-150 hover:bg-brand-200/40;
+  }
+
+  .skeleton {
+    @apply rounded-lg bg-gradient-to-r from-brand-200 via-white to-brand-200 bg-[length:400px_100%] animate-shimmer;
+  }
+
+  .text-gradient {
+    @apply inline-block bg-gradient-to-r from-brand-600 via-brand-500 to-mint-600 bg-clip-text text-transparent;
+    background-size: 200% 100%;
+    animation: gradient-x 6s ease infinite;
+  }
+}

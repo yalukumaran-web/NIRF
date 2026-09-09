@@ -1,0 +1,3130 @@
+[
+  {
+    "file": "IR-E-C-1331",
+    "instituteName": "M. S. Ramaiah Institute of Technology",
+    "instituteId": "IR-E-C-1331",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 10.71,
+      "rd": 9.27
+    },
+    "summary": {
+      "totalComputed": 7,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-C-16604",
+    "instituteName": "Sri Sivasubramaniya Nadar College of Engineering",
+    "instituteId": "IR-E-C-16604",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 10.73,
+      "rd": 3.58
+    },
+    "summary": {
+      "totalComputed": 6.43,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-C-24004",
+    "instituteName": "AU College of Engineering (A)",
+    "instituteId": "IR-E-C-24004",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 15,
+      "rd": 14.76
+    },
+    "summary": {
+      "totalComputed": 7.98,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-C-36995",
+    "instituteName": "Sri Krishna College of Engineering and Technology",
+    "instituteId": "IR-E-C-36995",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 8.07,
+      "rd": 2.52
+    },
+    "summary": {
+      "totalComputed": 6.06,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-C-37013",
+    "instituteName": "PSG College of Technology",
+    "instituteId": "IR-E-C-37013",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 9.89,
+      "rd": 0.72
+    },
+    "summary": {
+      "totalComputed": 6.06,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-C-6379",
+    "instituteName": "Netaji Subhas University of Technology (NSUT)",
+    "instituteId": "IR-E-C-6379",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 5.03,
+      "rd": 8.96
+    },
+    "summary": {
+      "totalComputed": 6.4,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-C-7252",
+    "instituteName": "Manipal Institute of Technology",
+    "instituteId": "IR-E-C-7252",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 7.44,
+      "rd": 18.28
+    },
+    "summary": {
+      "totalComputed": 7.57,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-I-1074",
+    "instituteName": "Indian Institute of Technology Delhi",
+    "instituteId": "IR-E-I-1074",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 13.73,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.13,
+      "rd": 22.68
+    },
+    "summary": {
+      "totalComputed": 7.63,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-I-1075",
+    "instituteName": "Indian Institute of Technology Kanpur",
+    "instituteId": "IR-E-I-1075",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 5.84,
+      "rd": 18.23
+    },
+    "summary": {
+      "totalComputed": 7.4,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-I-1441",
+    "instituteName": "Saveetha Institute of Medical and Technical Sciences",
+    "instituteId": "IR-E-I-1441",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 13.7,
+      "rd": 18.88
+    },
+    "summary": {
+      "totalComputed": 8.26,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-I-1480",
+    "instituteName": "Thapar Institute of Engineering and Technology (Deemed-to-be-university)",
+    "instituteId": "IR-E-I-1480",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 10.88,
+      "rd": 17.04
+    },
+    "summary": {
+      "totalComputed": 7.79,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0013",
+    "instituteName": "Indian Institute of Technology Hyderabad",
+    "instituteId": "IR-E-U-0013",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.11,
+      "rd": 17.78
+    },
+    "summary": {
+      "totalComputed": 7.39,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0014",
+    "instituteName": "International Institute of Information Technology Hyderabad",
+    "instituteId": "IR-E-U-0014",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.44,
+      "rd": 18.76
+    },
+    "summary": {
+      "totalComputed": 7.52,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0020",
+    "instituteName": "Koneru Lakshmaiah Education Foundation University (K L College of Engineering)",
+    "instituteId": "IR-E-U-0020",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 15,
+      "rd": 14.85
+    },
+    "summary": {
+      "totalComputed": 7.99,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0025",
+    "instituteName": "National Institute of Technology Warangal",
+    "instituteId": "IR-E-U-0025",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.62,
+      "rd": 12.68
+    },
+    "summary": {
+      "totalComputed": 6.93,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0042",
+    "instituteName": "University of Hyderabad",
+    "instituteId": "IR-E-U-0042",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 12.67,
+      "rd": 18.48
+    },
+    "summary": {
+      "totalComputed": 8.12,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0043",
+    "instituteName": "Vignan's Foundation for Science, Technology and Research",
+    "instituteId": "IR-E-U-0043",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 14.09,
+      "rd": 12.32
+    },
+    "summary": {
+      "totalComputed": 7.64,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0053",
+    "instituteName": "Indian Institute of Technology Guwahati",
+    "instituteId": "IR-E-U-0053",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.02,
+      "rd": 23.96
+    },
+    "summary": {
+      "totalComputed": 8,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0055",
+    "instituteName": "National Institute of Technology Silchar",
+    "instituteId": "IR-E-U-0055",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 5.78,
+      "rd": 12.44
+    },
+    "summary": {
+      "totalComputed": 6.82,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0064",
+    "instituteName": "Indian Institute of Technology Patna",
+    "instituteId": "IR-E-U-0064",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 5.23,
+      "rd": 19.69
+    },
+    "summary": {
+      "totalComputed": 7.49,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0072",
+    "instituteName": "National Institute of Technology Patna",
+    "instituteId": "IR-E-U-0072",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 5.73,
+      "rd": 10.08
+    },
+    "summary": {
+      "totalComputed": 6.58,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0092",
+    "instituteName": "National Institute of Technology, Raipur",
+    "instituteId": "IR-E-U-0092",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.63,
+      "rd": 12.27
+    },
+    "summary": {
+      "totalComputed": 6.89,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0098",
+    "instituteName": "Delhi Technological University",
+    "instituteId": "IR-E-U-0098",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 4.26,
+      "rd": 12.66
+    },
+    "summary": {
+      "totalComputed": 6.7,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0105",
+    "instituteName": "IIIT-Delhi (Indraprastha Institute of Information Technology Delhi)",
+    "instituteId": "IR-E-U-0105",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 4.09,
+      "rd": 11.23
+    },
+    "summary": {
+      "totalComputed": 6.53,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0108",
+    "instituteName": "Jamia Millia Islamia",
+    "instituteId": "IR-E-U-0108",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 8.69,
+      "rd": 21.21
+    },
+    "summary": {
+      "totalComputed": 7.99,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0139",
+    "instituteName": "Indian Institute of Technology Gandhinagar",
+    "instituteId": "IR-E-U-0139",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.6,
+      "rd": 20.82
+    },
+    "summary": {
+      "totalComputed": 7.74,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0149",
+    "instituteName": "Sardar Vallabhbhai National Institute of Technology",
+    "instituteId": "IR-E-U-0149",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.31,
+      "rd": 12.66
+    },
+    "summary": {
+      "totalComputed": 6.9,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0172",
+    "instituteName": "National Institute of Technology Kurukshetra",
+    "instituteId": "IR-E-U-0172",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.08,
+      "rd": 13.72
+    },
+    "summary": {
+      "totalComputed": 6.98,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0184",
+    "instituteName": "Indian Institute of Technology Mandi",
+    "instituteId": "IR-E-U-0184",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.66,
+      "rd": 24.28
+    },
+    "summary": {
+      "totalComputed": 8.1,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0197",
+    "instituteName": "National Institute of Technology Srinagar",
+    "instituteId": "IR-E-U-0197",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 7.78,
+      "rd": 13.87
+    },
+    "summary": {
+      "totalComputed": 7.17,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0202",
+    "instituteName": "Birla Institute of Technology",
+    "instituteId": "IR-E-U-0202",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 3.99,
+      "rd": 10.76
+    },
+    "summary": {
+      "totalComputed": 6.48,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0205",
+    "instituteName": "Indian Institute of Technology (Indian School of Mines)",
+    "instituteId": "IR-E-U-0205",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 5.75,
+      "rd": 22.9
+    },
+    "summary": {
+      "totalComputed": 7.87,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0207",
+    "instituteName": "National Institute of Technology, Jamshedpur",
+    "instituteId": "IR-E-U-0207",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 8.68,
+      "rd": 14.81
+    },
+    "summary": {
+      "totalComputed": 7.35,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0217",
+    "instituteName": "Christ University",
+    "instituteId": "IR-E-U-0217",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 8.07,
+      "rd": 19.21
+    },
+    "summary": {
+      "totalComputed": 7.73,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0221",
+    "instituteName": "International Institute of Information Technology Bangalore",
+    "instituteId": "IR-E-U-0221",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 7.67,
+      "rd": 22.86
+    },
+    "summary": {
+      "totalComputed": 8.06,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0223",
+    "instituteName": "Jain university,Bangalore",
+    "instituteId": "IR-E-U-0223",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 10.44,
+      "rd": 14.35
+    },
+    "summary": {
+      "totalComputed": 7.48,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0237",
+    "instituteName": "National Institute of Technology Karnataka, Surathkal",
+    "instituteId": "IR-E-U-0237",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.65,
+      "rd": 15.6
+    },
+    "summary": {
+      "totalComputed": 7.23,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0255",
+    "instituteName": "Indian Institute of Space Science and Technology",
+    "instituteId": "IR-E-U-0255",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 4.74,
+      "rd": 22.58
+    },
+    "summary": {
+      "totalComputed": 7.73,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0263",
+    "instituteName": "National Institute of Technology Calicut",
+    "instituteId": "IR-E-U-0263",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 7.32,
+      "rd": 13.41
+    },
+    "summary": {
+      "totalComputed": 7.07,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0273",
+    "instituteName": "Indian Institute of Technology Indore",
+    "instituteId": "IR-E-U-0273",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.22,
+      "rd": 21.25
+    },
+    "summary": {
+      "totalComputed": 7.75,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0284",
+    "instituteName": "Maulana Azad National Institute of Technology",
+    "instituteId": "IR-E-U-0284",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.51,
+      "rd": 12.72
+    },
+    "summary": {
+      "totalComputed": 6.92,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0306",
+    "instituteName": "Indian Institute of Technology Bombay",
+    "instituteId": "IR-E-U-0306",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 13.88,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 5.48,
+      "rd": 18
+    },
+    "summary": {
+      "totalComputed": 7.13,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0308",
+    "instituteName": "Institute of Chemical Technology",
+    "instituteId": "IR-E-U-0308",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 10.68,
+      "rd": 4.57
+    },
+    "summary": {
+      "totalComputed": 6.53,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0329",
+    "instituteName": "Symbiosis International",
+    "instituteId": "IR-E-U-0329",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 8.05,
+      "rd": 10.42
+    },
+    "summary": {
+      "totalComputed": 6.85,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0334",
+    "instituteName": "Visvesvaraya National Institute of Technology, Nagpur",
+    "instituteId": "IR-E-U-0334",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.57,
+      "rd": 12.81
+    },
+    "summary": {
+      "totalComputed": 6.94,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0355",
+    "instituteName": "Indian Institute of Technology Bhubaneswar",
+    "instituteId": "IR-E-U-0355",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 5.81,
+      "rd": 23.35
+    },
+    "summary": {
+      "totalComputed": 7.92,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0356",
+    "instituteName": "Kalinga Institute of Industrial Technology",
+    "instituteId": "IR-E-U-0356",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 15,
+      "rd": 23.17
+    },
+    "summary": {
+      "totalComputed": 8.82,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0357",
+    "instituteName": "National Institute of Technology Rourkela",
+    "instituteId": "IR-E-U-0357",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 5.99,
+      "rd": 13.63
+    },
+    "summary": {
+      "totalComputed": 6.96,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0363",
+    "instituteName": "Siksha `O` Anusandhan",
+    "instituteId": "IR-E-U-0363",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 15,
+      "rd": 20.96
+    },
+    "summary": {
+      "totalComputed": 8.6,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0373",
+    "instituteName": "Chitkara University",
+    "instituteId": "IR-E-U-0373",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 12.29,
+      "rd": 18.97
+    },
+    "summary": {
+      "totalComputed": 8.13,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0374",
+    "instituteName": "Dr. B R Ambedkar National Institute of Technology, Jalandhar",
+    "instituteId": "IR-E-U-0374",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.73,
+      "rd": 15.11
+    },
+    "summary": {
+      "totalComputed": 7.18,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0378",
+    "instituteName": "Indian Institute of Technology Ropar",
+    "instituteId": "IR-E-U-0378",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 5.68,
+      "rd": 22.79
+    },
+    "summary": {
+      "totalComputed": 7.85,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0379",
+    "instituteName": "Lovely Professional University",
+    "instituteId": "IR-E-U-0379",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 4.94,
+      "rd": 23.2
+    },
+    "summary": {
+      "totalComputed": 7.81,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0384",
+    "instituteName": "Sant Longowal Institute of Engineering & Technology",
+    "instituteId": "IR-E-U-0384",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 5.65,
+      "rd": 22.42
+    },
+    "summary": {
+      "totalComputed": 7.81,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0389",
+    "instituteName": "Banasthali Vidyapith",
+    "instituteId": "IR-E-U-0389",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 15,
+      "rd": 22.74
+    },
+    "summary": {
+      "totalComputed": 8.77,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0391",
+    "instituteName": "Birla Institute of Technology & Science -Pilani",
+    "instituteId": "IR-E-U-0391",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 4.24,
+      "rd": 19.82
+    },
+    "summary": {
+      "totalComputed": 7.4,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0395",
+    "instituteName": "Indian Institute of Technology Jodhpur",
+    "instituteId": "IR-E-U-0395",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 5.96,
+      "rd": 19.99
+    },
+    "summary": {
+      "totalComputed": 7.6,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0410",
+    "instituteName": "Malaviya National Institute of Technology",
+    "instituteId": "IR-E-U-0410",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.26,
+      "rd": 12.89
+    },
+    "summary": {
+      "totalComputed": 6.92,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0436",
+    "instituteName": "Amrita Vishwa Vidyapeetham",
+    "instituteId": "IR-E-U-0436",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 7.69,
+      "rd": 17.05
+    },
+    "summary": {
+      "totalComputed": 7.48,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0439",
+    "instituteName": "Anna University",
+    "instituteId": "IR-E-U-0439",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 11.77,
+      "rd": 0.53
+    },
+    "summary": {
+      "totalComputed": 6.23,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0456",
+    "instituteName": "Indian Institute of Technology Madras",
+    "instituteId": "IR-E-U-0456",
+    "rosterRows": 0,
+    "cohortRows": 12,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 5.81,
+      "rd": 19.94
+    },
+    "summary": {
+      "totalComputed": 7.57,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0458",
+    "instituteName": "Kalasalingam Academy of Research and Education",
+    "instituteId": "IR-E-U-0458",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 15,
+      "rd": 18.37
+    },
+    "summary": {
+      "totalComputed": 8.34,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0467",
+    "instituteName": "National Institute of Technology Tiruchirappalli",
+    "instituteId": "IR-E-U-0467",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.27,
+      "rd": 15.3
+    },
+    "summary": {
+      "totalComputed": 7.16,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0473",
+    "instituteName": "S.R.M. Institute of Science and Technology",
+    "instituteId": "IR-E-U-0473",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 10.79,
+      "rd": 21.64
+    },
+    "summary": {
+      "totalComputed": 8.24,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0474",
+    "instituteName": "Sathyabama Institute of Science and Technology",
+    "instituteId": "IR-E-U-0474",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 12.52,
+      "rd": 21.35
+    },
+    "summary": {
+      "totalComputed": 8.38,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0476",
+    "instituteName": "Shanmugha Arts Science Technology & Research Academy",
+    "instituteId": "IR-E-U-0476",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 13.7,
+      "rd": 18.56
+    },
+    "summary": {
+      "totalComputed": 8.23,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0489",
+    "instituteName": "Vel Tech Rangarajan Dr. Sagunthala R & D Institute of Science and Technology",
+    "instituteId": "IR-E-U-0489",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.13,
+      "rd": 20.93
+    },
+    "summary": {
+      "totalComputed": 7.7,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0490",
+    "instituteName": "Vellore Institute of Technology",
+    "instituteId": "IR-E-U-0490",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 7.06,
+      "rd": 18.21
+    },
+    "summary": {
+      "totalComputed": 7.53,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0496",
+    "instituteName": "Aligarh Muslim University",
+    "instituteId": "IR-E-U-0496",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 13.16,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 5.16,
+      "rd": 5.22
+    },
+    "summary": {
+      "totalComputed": 5.67,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0497",
+    "instituteName": "Amity University",
+    "instituteId": "IR-E-U-0497",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 11.26,
+      "rd": 18.11
+    },
+    "summary": {
+      "totalComputed": 7.94,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0530",
+    "instituteName": "Motilal Nehru National Institute of Technology",
+    "instituteId": "IR-E-U-0530",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 5.82,
+      "rd": 12.36
+    },
+    "summary": {
+      "totalComputed": 6.82,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0535",
+    "instituteName": "Rajiv Gandhi Institute of Petroleum Technology",
+    "instituteId": "IR-E-U-0535",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 4.47,
+      "rd": 15.47
+    },
+    "summary": {
+      "totalComputed": 7,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0555",
+    "instituteName": "Graphic Era University",
+    "instituteId": "IR-E-U-0555",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 14.8,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 9.2,
+      "rd": 13.07
+    },
+    "summary": {
+      "totalComputed": 7.19,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0560",
+    "instituteName": "Indian Institute of Technology Roorkee",
+    "instituteId": "IR-E-U-0560",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.18,
+      "rd": 23.84
+    },
+    "summary": {
+      "totalComputed": 8,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0564",
+    "instituteName": "UPES",
+    "instituteId": "IR-E-U-0564",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 7,
+      "rd": 19.8
+    },
+    "summary": {
+      "totalComputed": 7.68,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0573",
+    "instituteName": "Indian Institute of Technology Kharagpur",
+    "instituteId": "IR-E-U-0573",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 5.17,
+      "rd": 21.32
+    },
+    "summary": {
+      "totalComputed": 7.65,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0575",
+    "instituteName": "Jadavpur University",
+    "instituteId": "IR-E-U-0575",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 14.64,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 3.71,
+      "rd": 4.17
+    },
+    "summary": {
+      "totalComputed": 5.72,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0577",
+    "instituteName": "National Institute of Technology Durgapur",
+    "instituteId": "IR-E-U-0577",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.82,
+      "rd": 14.69
+    },
+    "summary": {
+      "totalComputed": 7.15,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0584",
+    "instituteName": "Indian Institute of Engineering Science and Technology, Shibpur",
+    "instituteId": "IR-E-U-0584",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.1,
+      "rd": 12.4
+    },
+    "summary": {
+      "totalComputed": 6.85,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0619",
+    "instituteName": "National Institute of Technology Meghalaya",
+    "instituteId": "IR-E-U-0619",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 7.49,
+      "rd": 12.76
+    },
+    "summary": {
+      "totalComputed": 7.03,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0621",
+    "instituteName": "National Institute of Technology Puducherry",
+    "instituteId": "IR-E-U-0621",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 7.9,
+      "rd": 15.29
+    },
+    "summary": {
+      "totalComputed": 7.32,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0622",
+    "instituteName": "National Institute of Technology Delhi",
+    "instituteId": "IR-E-U-0622",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 8.08,
+      "rd": 16.73
+    },
+    "summary": {
+      "totalComputed": 7.48,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0701",
+    "instituteName": "Indian Institute of Technology (Banaras Hindu University) Varanasi",
+    "instituteId": "IR-E-U-0701",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 5.77,
+      "rd": 19.4
+    },
+    "summary": {
+      "totalComputed": 7.52,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0739",
+    "instituteName": "Madan Mohan Malaviya University of Technology",
+    "instituteId": "IR-E-U-0739",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 14.26,
+      "rd": 11.42
+    },
+    "summary": {
+      "totalComputed": 7.57,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0747",
+    "instituteName": "Chandigarh University",
+    "instituteId": "IR-E-U-0747",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 15,
+      "rd": 20.72
+    },
+    "summary": {
+      "totalComputed": 8.57,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0749",
+    "instituteName": "Manipal University Jaipur",
+    "instituteId": "IR-E-U-0749",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 12.14,
+      "rd": 22.27
+    },
+    "summary": {
+      "totalComputed": 8.44,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0844",
+    "instituteName": "Indian Institute Of Technology, Tirupati",
+    "instituteId": "IR-E-U-0844",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.08,
+      "rd": 15.61
+    },
+    "summary": {
+      "totalComputed": 7.17,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0878",
+    "instituteName": "Indian Institute of Technology Palakkad",
+    "instituteId": "IR-E-U-0878",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 7.03,
+      "rd": 21.27
+    },
+    "summary": {
+      "totalComputed": 7.83,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0899",
+    "instituteName": "Indian Institute of Technology Dharwad",
+    "instituteId": "IR-E-U-0899",
+    "rosterRows": 0,
+    "cohortRows": 12,
+    "pcsQuestions": 2,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "partial",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 13.33,
+      "fqe": null,
+      "wd": 5.73,
+      "rd": 22.83
+    },
+    "summary": {
+      "totalComputed": 7.18,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0906",
+    "instituteName": "Indian Institute of Technology Jammu",
+    "instituteId": "IR-E-U-0906",
+    "rosterRows": 0,
+    "cohortRows": 9,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 5.57,
+      "rd": 23.81
+    },
+    "summary": {
+      "totalComputed": 7.94,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-0946",
+    "instituteName": "Indian Institute of Technology Bhilai",
+    "instituteId": "IR-E-U-0946",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 6.11,
+      "rd": 23.74
+    },
+    "summary": {
+      "totalComputed": 7.98,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  },
+  {
+    "file": "IR-E-U-1257",
+    "instituteName": "COEP Technological University",
+    "instituteId": "IR-E-U-1257",
+    "rosterRows": 0,
+    "cohortRows": 6,
+    "pcsQuestions": 3,
+    "statuses": {
+      "fsr": "unable",
+      "gue": "computed",
+      "pcs": "computed",
+      "fqe": "unable",
+      "wd": "partial",
+      "rd": "computed"
+    },
+    "scores": {
+      "fsr": null,
+      "gue": 15,
+      "pcs": 20,
+      "fqe": null,
+      "wd": 8.47,
+      "rd": 1.37
+    },
+    "summary": {
+      "totalComputed": 5.99,
+      "totalMax": 26,
+      "availableMax": 11,
+      "hasUnable": true,
+      "unableKeys": [
+        "fsr",
+        "fqe"
+      ]
+    }
+  }
+]
