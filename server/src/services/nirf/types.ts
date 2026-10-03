@@ -2,6 +2,19 @@ import type { Officiality } from "../../nirf/types";
 
 export type SubStatus = "ok" | "partial" | "insufficient_data";
 
+/** One arithmetic step in a sub-parameter's calculation (values plugged in). */
+export interface Step {
+  label: string;
+  equation: string;
+  result: number | string | null;
+}
+
+/** Honest transparency flag — mirrors the absolute module's severity levels. */
+export interface Flag {
+  severity: "info" | "warning" | "error";
+  message: string;
+}
+
 export interface SubScore {
   key: string;
   label: string;
@@ -18,6 +31,11 @@ export interface SubScore {
   /** Marks scored (0..marks). null => insufficient data. */
   score: number | null; // null => insufficient data
   status: SubStatus;
+  /** True when the sub-parameter was deliberately excluded from computation
+   *  (e.g. absolute-methodology parameters skipped in the relative PDF flow).
+   *  Its score is null — it neither helps nor penalizes the parameter, which
+   *  renormalizes over the included marks. */
+  excluded?: boolean;
   missingFields: string[];
   /** Human-readable formula as published (or best known). */
   formula?: string;
@@ -29,6 +47,14 @@ export interface SubScore {
   normalizationNote?: string;
   /** Plain-language explanation of what the metric rewards. */
   explanation?: string;
+  /** Weighted contribution to the final 100-scale score (score × parameter weight). */
+  contribution?: number | null;
+  /** Max possible contribution (marks × parameter weight). */
+  maxContribution?: number;
+  /** Ordered arithmetic trace with actual values used (mirrors the absolute module). */
+  steps?: Step[];
+  /** Transparency flags: missing / partial / below-threshold messages. */
+  flags?: Flag[];
 }
 
 export interface ParameterScore {

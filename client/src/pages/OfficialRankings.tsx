@@ -104,7 +104,7 @@ export default function OfficialRankings() {
         <Spinner label="Loading rankings…" />
       ) : scores.length === 0 ? (
         <Card>
-          <p className="text-sm text-brand-900/50">
+          <p className="text-sm text-[var(--text-2)]">
             No official scores published for {category} {year}.
           </p>
         </Card>
@@ -112,7 +112,7 @@ export default function OfficialRankings() {
         <Card className="animate-fade-up overflow-hidden p-0">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="text-left border-b border-brand-200 bg-brand-200/30">
+              <thead className="text-left border-b border-[var(--border-2)] bg-[var(--surface-3)]">
                 <tr>
                   <th className="th">Rank</th>
                   <th className="th">Institute</th>
@@ -128,24 +128,24 @@ export default function OfficialRankings() {
                 {scores.map((s) => (
                   <tr
                     key={s.rank}
-                    className="tr-hover border-b border-brand-200/50 last:border-0"
+                    className="tr-hover border-b border-[var(--border)] last:border-0"
                   >
                     <td className="td">
                       <span
                         className={cn(
                           "inline-grid h-7 w-8 place-items-center rounded-lg font-bold",
                           s.rank <= 3
-                            ? "bg-gradient-to-br from-brand-500 to-mint-500 text-white shadow-glow"
-                            : "text-brand-900/70"
+                            ? "bg-gradient-to-br from-brand-600 to-brand-700 text-white shadow-glow"
+                            : "text-[var(--text-1)]"
                         )}
                       >
                         {s.rank}
                       </span>
                     </td>
-                    <td className="td font-medium text-brand-900">
+                    <td className="td font-medium text-[var(--text-1)]">
                       {s.institute_name}
                     </td>
-                    <td className="td text-right font-bold text-brand-900">
+                    <td className="td text-right font-bold text-[var(--text-1)]">
                       {Number(s.score).toFixed(2)}
                     </td>
                     <td className="td text-right">

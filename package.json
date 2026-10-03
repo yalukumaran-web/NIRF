@@ -1,0 +1,27 @@
+{
+  "name": "nirf_ranking",
+  "version": "1.0.0",
+  "description": "Full-stack web application for computing NIRF (National Institutional Ranking Framework) scores and predicting rankings for Indian educational institutions. Supports the Engineering category with data from the NIRF 2025 framework.",
+  "main": "generate_comparison.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yalukumaran-web/NIRF_RANKING.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/yalukumaran-web/NIRF_RANKING/issues"
+  },
+  "homepage": "https://github.com/yalukumaran-web/NIRF_RANKING#readme",
+  "dependencies": {
+    "axios": "^1.20.0",
+    "cheerio": "^1.2.0",
+    "exceljs": "^4.4.0",
+    "googlethis": "^1.8.0"
+  }
+}

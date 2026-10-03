@@ -163,6 +163,8 @@ const EXTERNAL_SOURCE_FIELDS: { key: keyof ExtractedNirf; basis: string }[] = [
   },
 ];
 
+const EXCLUDED_DESIGNATIONS = /^(others?|other)$/i;
+
 const TEACHING_DESIGNATIONS = new Set([
   "Professor",
   "Associate Professor",
@@ -235,7 +237,11 @@ function parseStudentRows(section: string): StudentRow[] {
       .match(/\d[\d,]*/g)
       ?.map((t) => num(t))
       .filter((v): v is number => v !== undefined) ?? [];
-    rows.push({ label: m[0].replace(/(-|\s)+/g, " ").trim(), nums });
+    // Keep ONLY the program header as the label — m[0] also contains the
+    // trailing numeric cells which must not leak into the label (FSR's
+    // denominator matches rows by program name).
+    const header = m[0].match(/(?:UG|PG)\s+\[\s*\d\s*Years?\s+Program\(s\)\s*\]/i)?.[0] ?? m[0];
+    rows.push({ label: header.replace(/\s+/g, " ").trim(), nums });
   }
   return rows;
 }
@@ -393,6 +399,7 @@ function collectPhd(
 interface RosterRow {
   serial: number;
   designation: string;
+  appointmentType: string;
   gender: string;
   qualification: string;
   experienceMonths: number;
@@ -422,6 +429,9 @@ function parseRoster(tail: string): RosterRow[] {
     rows.push({
       serial: Number(m[1]),
       designation: m[4] ?? "",
+      // The appointment type is the LAST field (after the two date columns),
+      // captured in group 9 — the join/leave date tokens are non-capturing.
+      appointmentType: (m[9] ?? "").trim(),
       gender: m[5] ?? "",
       qualification: (m[6] ?? "").trim(),
       experienceMonths: Number(m[7]) || 0,
@@ -446,44 +456,42 @@ function collectFaculty(
     out.facultyRoster = roster.map((r) => ({
       serial: r.serial,
       designation: r.designation,
+      appointmentType: r.appointmentType,
       gender: r.gender,
       qualification: r.qualification,
       experienceMonths: r.experienceMonths,
       working: r.working,
     }));
     const totalRows = roster.length;
-    const notTeaching = roster.filter((r) => !TEACHING_DESIGNATIONS.has(r.designation));
-    const teachingNotWorking = roster.filter(
-      (r) => TEACHING_DESIGNATIONS.has(r.designation) && !r.working
-    );
-    const teaching = roster.filter(
-      (r) => TEACHING_DESIGNATIONS.has(r.designation) && r.working
-    );
+    const excluded = roster.filter((r) => EXCLUDED_DESIGNATIONS.test(r.designation.trim()));
+    const notExcluded = roster.filter((r) => !EXCLUDED_DESIGNATIONS.test(r.designation.trim()));
+    const teachingNotWorking = notExcluded.filter((r) => !r.working);
+    const teachingWorking = notExcluded.filter((r) => r.working);
 
-    setField(out, fields, "permanentFaculty", teaching.length, "pdf",
-      `Faculty roster: ${totalRows} rows parsed; excluded ${notTeaching.length} rows whose designation is not Professor/Associate Professor/Assistant Professor (mostly 'Other' admin/adjunct: ${notTeaching.slice(0, 3).map((r) => r.designation).join(", ")}${notTeaching.length > 3 ? ", …" : ""}) and ${teachingNotWorking.length} rows not currently working => Designation filter ∩ Currently-working = ${teaching.length}.`);
+    setField(out, fields, "permanentFaculty", teachingWorking.length, "pdf",
+      `Faculty roster: ${totalRows} rows parsed; excluded ${excluded.length} row(s) whose designation matches 'Other/Others' (${excluded.slice(0, 3).map((r) => r.designation).join(", ")}${excluded.length > 3 ? ", …" : ""}) and ${teachingNotWorking.length} rows not currently working => All except 'Others' ∩ Currently-working = ${teachingWorking.length}.`);
 
-    const phdCount = teaching.filter((r) => isPhdQualification(r.qualification)).length;
+    const phdCount = teachingWorking.filter((r) => isPhdQualification(r.qualification)).length;
     setField(out, fields, "facultyWithPhD", phdCount, "pdf",
-      `Faculty with Ph.D = roster count where Qualification is "Ph.D" within the ${teaching.length} teaching (working) rows = ${phdCount}.`);
+      `Faculty with Ph.D = roster count where Qualification is "Ph.D" within the ${teachingWorking.length} working rows = ${phdCount}.`);
 
     let b0 = 0, b1 = 0, b2 = 0;
-    for (const r of teaching) {
+    for (const r of teachingWorking) {
       const years = r.experienceMonths / 12;
       if (years < 8) b0++;
       else if (years < 15) b1++;
       else b2++;
     }
     setField(out, fields, "facultyExp0to8", b0, "pdf",
-      `Teaching faculty with experience in [0, 8) years (from Experience in Months / 12, half-open bands) = ${b0}.`);
+      `Faculty with experience in [0, 8) years (from Experience in Months / 12, half-open bands) = ${b0}.`);
     setField(out, fields, "facultyExp8to15", b1, "pdf",
-      `Teaching faculty with experience in [8, 15) years (half-open bands; 8.0 yrs → this band) = ${b1}.`);
+      `Faculty with experience in [8, 15) years (half-open bands; 8.0 yrs → this band) = ${b1}.`);
     setField(out, fields, "facultyExp15plus", b2, "pdf",
-      `Teaching faculty with experience >= 15 years (15.0 yrs → this band) = ${b2}.`);
+      `Faculty with experience >= 15 years (15.0 yrs → this band) = ${b2}.`);
 
-    const women = teaching.filter((r) => r.gender === "Female").length;
+    const women = teachingWorking.filter((r) => r.gender === "Female").length;
     setField(out, fields, "womenFaculty", women, "pdf",
-      `Women faculty = Female rows within the ${teaching.length} teaching (working) roster rows = ${women}.`);
+      `Women faculty = Female rows within the ${teachingWorking.length} working roster rows = ${women}.`);
   } else if (summaryM) {
     setField(out, fields, "permanentFaculty", num(summaryM[1]), "estimated_default",
       "Faculty roster is not embedded row-by-row in this DCS export; using NIRF's 'Number of faculty members entered' summary count WITHOUT the designation/currently-working filter (estimate only — could not compute F, FPhD, women faculty or experience bands). Verify against the full export before submitting.");
@@ -855,10 +863,22 @@ function collectPcs(
   out: ExtractedNirf,
   fields: Record<string, ExtractedField>
 ): void {
-  const seg = sectionAfter(text, /Facilities\s+of\s+Physically\s+Challenged/i,
+  let seg = sectionAfter(text, /Facilities\s+of\s+Physically\s+Challenged/i,
     [/Faculty\s+Details/i]);
+  if (!seg) {
+    seg = sectionAfter(text, /Facilities\s+of\s+Physically\s+Challenged/i, []);
+  }
+  if (!seg) {
+    const altIdx = text.search(/Physically\s+Challenged/i);
+    if (altIdx !== -1) {
+      seg = text.slice(altIdx, Math.min(altIdx + 2000, text.length));
+    }
+  }
   if (seg) {
     out.pcsQuestions = parsePcsQuestions(seg);
+    if (out.pcsQuestions.length === 0) {
+      out.pcsQuestions = parsePcsQuestionsFallback(seg);
+    }
     const yes = (seg.match(/\bYes\b/gi) ?? []).length;
     const no = (seg.match(/\bNo\b(?!\.\s)/gi) ?? []).length;
     if (yes > 0) {
@@ -891,7 +911,6 @@ function cleanPcsAnswer(s: string): string {
 
 function parsePcsQuestions(seg: string): PcsQuestion[] {
   const out: PcsQuestion[] = [];
-  // Each question: "<n>. <question text>?  <answer>" up to the next "<n>." or end.
   const re = /(\d+\.)\s*([^?]+?)\?\s*(.+?)(?=(?:\s*\d+\.\s*[A-Z])|\s*$)/gi;
   let m: RegExpExecArray | null;
   while ((m = re.exec(seg))) {
@@ -900,6 +919,60 @@ function parsePcsQuestions(seg: string): PcsQuestion[] {
     if (key) {
       out.push({ key, label: question, rawAnswer: cleanPcsAnswer(m[3] ?? "") });
     }
+  }
+  return out;
+}
+
+function parsePcsQuestionsFallback(seg: string): PcsQuestion[] {
+  const out: PcsQuestion[] = [];
+  const clean = seg.replace(/\[PAGE\s+\d+\]/gi, " ");
+  const lines = clean.split(/\n/).map((l) => l.trim()).filter(Boolean);
+  const answers: { key: PcsQuestion["key"]; label: string; rawAnswer: string }[] = [];
+  let currentQuestion: string | null = null;
+  for (const line of lines) {
+    const qMatch = line.match(/^\d+\.\s*(.+)/);
+    if (qMatch) {
+      const qText = qMatch[1].trim();
+      if (qText.includes("?")) {
+        const parts = qText.split("?");
+        const question = parts[0].trim();
+        const answer = (parts.slice(1).join("?").trim()) || "";
+        const key = classifyPcsQuestion(question);
+        if (key) {
+          answers.push({ key, label: question, rawAnswer: cleanPcsAnswer(answer || "") });
+        }
+        currentQuestion = null;
+      } else {
+        currentQuestion = qText;
+      }
+    } else if (currentQuestion) {
+      const full: string = currentQuestion + " " + line;
+      if (full.includes("?")) {
+        const parts = full.split("?");
+        const question = parts[0].trim();
+        const answer = (parts.slice(1).join("?").trim()) || "";
+        const key = classifyPcsQuestion(question);
+        if (key) {
+          answers.push({ key, label: question, rawAnswer: cleanPcsAnswer(answer || "") });
+        }
+        currentQuestion = null;
+      } else {
+        currentQuestion = full;
+      }
+    } else {
+      const yesNo = line.match(/^((?:Yes|No)[^.!?\s]*(?:[.!])?)/i);
+      if (yesNo && answers.length > 0 && !answers[answers.length - 1].rawAnswer) {
+        answers[answers.length - 1].rawAnswer = cleanPcsAnswer(yesNo[1]);
+      }
+    }
+  }
+  for (const a of answers) {
+    if (!a.rawAnswer) {
+      const pat = new RegExp(`(?:Yes|No)[^.!?\n]*`, "i");
+      const nearby = clean.match(pat);
+      if (nearby) a.rawAnswer = cleanPcsAnswer(nearby[0]);
+    }
+    out.push({ key: a.key, label: a.label, rawAnswer: a.rawAnswer || "Yes" });
   }
   return out;
 }

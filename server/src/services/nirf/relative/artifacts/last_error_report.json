@@ -1,0 +1,360 @@
+{
+  "validateYear": 2025,
+  "perParam": [
+    {
+      "key": "ss",
+      "mae": 0.018636363636363076,
+      "maxError": 0.046249999999997016,
+      "withinTolerance": 22,
+      "total": 22,
+      "worst": [
+        {
+          "collegeId": "IR-E-U-0573",
+          "actual": 18.3,
+          "predicted": 18.35,
+          "error": 0.05
+        },
+        {
+          "collegeId": "IR-E-U-0467",
+          "actual": 13.4,
+          "predicted": 13.35,
+          "error": 0.05
+        },
+        {
+          "collegeId": "IR-E-I-1074",
+          "actual": 18.1,
+          "predicted": 18.14,
+          "error": 0.04
+        },
+        {
+          "collegeId": "IR-E-U-0357",
+          "actual": 13,
+          "predicted": 12.96,
+          "error": 0.04
+        },
+        {
+          "collegeId": "IR-E-U-0237",
+          "actual": 12,
+          "predicted": 12.04,
+          "error": 0.04
+        }
+      ]
+    },
+    {
+      "key": "fru",
+      "mae": 0.0021560268456660803,
+      "maxError": 0.028520829819527194,
+      "withinTolerance": 22,
+      "total": 22,
+      "worst": [
+        {
+          "collegeId": "IR-E-U-0473",
+          "actual": 22.1,
+          "predicted": 22.13,
+          "error": 0.03
+        },
+        {
+          "collegeId": "IR-E-U-0201",
+          "actual": 23.3,
+          "predicted": 23.29,
+          "error": 0.01
+        },
+        {
+          "collegeId": "IR-E-U-0456",
+          "actual": 30,
+          "predicted": 30,
+          "error": 0
+        },
+        {
+          "collegeId": "IR-E-I-1074",
+          "actual": 30,
+          "predicted": 30,
+          "error": 0
+        },
+        {
+          "collegeId": "IR-E-U-0306",
+          "actual": 30,
+          "predicted": 30,
+          "error": 0
+        }
+      ]
+    },
+    {
+      "key": "pu",
+      "mae": 0.07020991853145117,
+      "maxError": 0.279415207943579,
+      "withinTolerance": 22,
+      "total": 22,
+      "worst": [
+        {
+          "collegeId": "IR-E-I-1075",
+          "actual": 34.2,
+          "predicted": 34.48,
+          "error": 0.28
+        },
+        {
+          "collegeId": "IR-E-U-0306",
+          "actual": 35,
+          "predicted": 34.73,
+          "error": 0.27
+        },
+        {
+          "collegeId": "IR-E-U-0273",
+          "actual": 33.3,
+          "predicted": 33.12,
+          "error": 0.18
+        },
+        {
+          "collegeId": "IR-E-U-0490",
+          "actual": 31.9,
+          "predicted": 32.01,
+          "error": 0.11
+        },
+        {
+          "collegeId": "IR-E-U-0701",
+          "actual": 32.9,
+          "predicted": 33,
+          "error": 0.1
+        }
+      ]
+    },
+    {
+      "key": "qp",
+      "mae": 0.06549030024156721,
+      "maxError": 0.1492591865395383,
+      "withinTolerance": 22,
+      "total": 22,
+      "worst": [
+        {
+          "collegeId": "IR-E-U-0306",
+          "actual": 39.9,
+          "predicted": 39.75,
+          "error": 0.15
+        },
+        {
+          "collegeId": "IR-E-U-0490",
+          "actual": 36.7,
+          "predicted": 36.82,
+          "error": 0.12
+        },
+        {
+          "collegeId": "IR-E-U-0575",
+          "actual": 36.7,
+          "predicted": 36.82,
+          "error": 0.12
+        },
+        {
+          "collegeId": "IR-E-U-0198",
+          "actual": 37.4,
+          "predicted": 37.52,
+          "error": 0.12
+        },
+        {
+          "collegeId": "IR-E-U-0064",
+          "actual": 38,
+          "predicted": 38.11,
+          "error": 0.11
+        }
+      ]
+    },
+    {
+      "key": "ipr",
+      "mae": 0.1900011764197072,
+      "maxError": 1.1987974277710354,
+      "withinTolerance": 22,
+      "total": 22,
+      "worst": [
+        {
+          "collegeId": "IR-E-U-0306",
+          "actual": 14.4,
+          "predicted": 13.2,
+          "error": 1.2
+        },
+        {
+          "collegeId": "IR-E-I-1075",
+          "actual": 12,
+          "predicted": 12.8,
+          "error": 0.8
+        },
+        {
+          "collegeId": "IR-E-I-1074",
+          "actual": 13.3,
+          "predicted": 13.88,
+          "error": 0.58
+        },
+        {
+          "collegeId": "IR-E-U-0273",
+          "actual": 8.1,
+          "predicted": 7.9,
+          "error": 0.2
+        },
+        {
+          "collegeId": "IR-E-U-0357",
+          "actual": 4.4,
+          "predicted": 4.6,
+          "error": 0.2
+        }
+      ]
+    },
+    {
+      "key": "fppp",
+      "mae": 0.48400546821599444,
+      "maxError": 0.9195488721804512,
+      "withinTolerance": 22,
+      "total": 22,
+      "worst": [
+        {
+          "collegeId": "IR-E-I-1074",
+          "actual": 10,
+          "predicted": 9.08,
+          "error": 0.92
+        },
+        {
+          "collegeId": "IR-E-I-1075",
+          "actual": 9.1,
+          "predicted": 8.18,
+          "error": 0.92
+        },
+        {
+          "collegeId": "IR-E-U-0573",
+          "actual": 8.9,
+          "predicted": 8.05,
+          "error": 0.85
+        },
+        {
+          "collegeId": "IR-E-U-0560",
+          "actual": 8.2,
+          "predicted": 7.37,
+          "error": 0.83
+        },
+        {
+          "collegeId": "IR-E-U-0013",
+          "actual": 7.6,
+          "predicted": 6.87,
+          "error": 0.73
+        }
+      ]
+    },
+    {
+      "key": "gph",
+      "mae": 0.13141126587528132,
+      "maxError": 0.504347800556797,
+      "withinTolerance": 22,
+      "total": 22,
+      "worst": [
+        {
+          "collegeId": "IR-E-U-0391",
+          "actual": 30.6,
+          "predicted": 30.1,
+          "error": 0.5
+        },
+        {
+          "collegeId": "IR-E-U-0201",
+          "actual": 22.5,
+          "predicted": 22.11,
+          "error": 0.39
+        },
+        {
+          "collegeId": "IR-E-U-0456",
+          "actual": 33.2,
+          "predicted": 32.89,
+          "error": 0.31
+        },
+        {
+          "collegeId": "IR-E-U-0053",
+          "actual": 29,
+          "predicted": 28.77,
+          "error": 0.23
+        },
+        {
+          "collegeId": "IR-E-U-0467",
+          "actual": 27.4,
+          "predicted": 27.61,
+          "error": 0.21
+        }
+      ]
+    },
+    {
+      "key": "gphd",
+      "mae": 0.02090909090909119,
+      "maxError": 0.0400000000000027,
+      "withinTolerance": 22,
+      "total": 22,
+      "worst": [
+        {
+          "collegeId": "IR-E-U-0573",
+          "actual": 18.8,
+          "predicted": 18.76,
+          "error": 0.04
+        },
+        {
+          "collegeId": "IR-E-U-0053",
+          "actual": 14.2,
+          "predicted": 14.24,
+          "error": 0.04
+        },
+        {
+          "collegeId": "IR-E-U-0467",
+          "actual": 9,
+          "predicted": 9.04,
+          "error": 0.04
+        },
+        {
+          "collegeId": "IR-E-U-0391",
+          "actual": 5.4,
+          "predicted": 5.36,
+          "error": 0.04
+        },
+        {
+          "collegeId": "IR-E-U-0273",
+          "actual": 12.4,
+          "predicted": 12.36,
+          "error": 0.04
+        }
+      ]
+    },
+    {
+      "key": "ms",
+      "mae": 0.0801833862022812,
+      "maxError": 0.7131774584526092,
+      "withinTolerance": 22,
+      "total": 22,
+      "worst": [
+        {
+          "collegeId": "IR-E-U-0306",
+          "actual": 25,
+          "predicted": 24.29,
+          "error": 0.71
+        },
+        {
+          "collegeId": "IR-E-U-0467",
+          "actual": 16.7,
+          "predicted": 16.22,
+          "error": 0.48
+        },
+        {
+          "collegeId": "IR-E-U-0357",
+          "actual": 16.7,
+          "predicted": 16.22,
+          "error": 0.48
+        },
+        {
+          "collegeId": "IR-E-U-0456",
+          "actual": 25,
+          "predicted": 24.99,
+          "error": 0.01
+        },
+        {
+          "collegeId": "IR-E-I-1074",
+          "actual": 25,
+          "predicted": 24.99,
+          "error": 0.01
+        }
+      ]
+    }
+  ],
+  "overallMae": 0.1181114440974892,
+  "collegesFlagged": [],
+  "passedTolerance": true,
+  "note": "Held-out validation: trained on [2023, 2024], validated on 2025 (22 colleges, thresholds: 80% completeness). MAE across params = 0.12 marks. Parameter model type per param: see artifact."
+}

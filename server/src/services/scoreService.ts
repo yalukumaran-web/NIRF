@@ -77,10 +77,11 @@ export async function upsertRawMetrics(
 export async function computeAndSave(
   institutionId: number,
   input: RawMetricsInput,
-  category: NIRFCategory
+  category: NIRFCategory,
+  excludedSubParameters?: string[]
 ): Promise<ScoreResult> {
   const metrics: RawMetricsInput = { ...input };
-  const score = computeScore(metrics as any, { category, year: input.year });
+  const score = computeScore(metrics as any, { category, year: input.year, excludedSubParameters });
 
   const client = await pool.connect();
   try {

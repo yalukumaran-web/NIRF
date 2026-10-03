@@ -1,0 +1,10 @@
+ChandigarhUniv	Chandigarh University	https://www.cuchd.in/nirf/img/nirf-2025-engineering.pdf	pdfs\ChandigarhUniv_Engineering_NIRF_2025.pdf
+IITRopar	Indian Institute of Technology Ropar	https://www.iitrpr.ac.in/downloads/sites/default/files/NIRF/Indian%20Institute%20of%20Technology%20Ropar20250214-Eng%201%29.pdf	pdfs\IITRopar_Engineering_NIRF_2025.pdf
+Kalasalingam	Kalasalingam Academy of Research and Education	https://www.kalasalingam.ac.in/wp-content/uploads/2026/04/NIRF-25_Engg.pdf	pdfs\Kalasalingam_Engineering_NIRF_2025.pdf
+AMU	Aligarh Muslim University	https://api.amu.ac.in/storage//file/10182/file_management/1739594229.pdf	pdfs\AMU_Engineering_NIRF_2025.pdf
+KLEF	Koneru Lakshmaiah Education Foundation University (K L College of Engineering)	https://www.kluniversity.in/NIRF/ENGINEERING25.pdf	pdfs\KLEF_Engineering_NIRF_2025.pdf
+KIIT	Kalinga Institute of Industrial Technology	https://www.kiit.ac.in/wp-content/uploads/2025/02/Kalinga-Institute-of-Industrial-Technology20250106-Engineering.pdf	pdfs\KIIT_Engineering_NIRF_2025.pdf
+Amity	Amity University	https://auup.amity.edu/pdf/AmityUniversity20250119-Enggn.pdf	pdfs\Amity_Engineering_NIRF_2025.pdf
+IIITHyderabad	International Institute of Information Technology Hyderabad	https://www.iiit.ac.in/wp-content/uploads/2025/02/NIRF_Eng_23-24_Submitted_20250131.pdf	pdfs\IIITHyderabad_Engineering_NIRF_2025.pdf
+IITBhubaneswar	Indian Institute of Technology Bhubaneswar	https://www.iitbbs.ac.in/wp-content/uploads/2025/02/Engineering-2025.pdf	pdfs\IITBhubaneswar_Engineering_NIRF_2025.pdf
+SASTRA	Shanmugha Arts Science Technology & Research Academy	NOT AVAILABLE	NOT AVAILABLE

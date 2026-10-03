@@ -162,7 +162,7 @@ export default function Mldashboard() {
 
           <Reveal>
             <Card>
-              <h3 className="mb-4 text-sm font-semibold text-brand-900/70">
+              <h3 className="mb-4 text-sm font-semibold text-[var(--text-1)]">
                 Train new model
               </h3>
               <div className="flex flex-wrap items-end gap-4">
@@ -210,7 +210,7 @@ export default function Mldashboard() {
                 </button>
               </div>
               {datasets.length === 0 && (
-                <p className="mt-3 text-xs text-brand-900/40">
+                <p className="mt-3 text-xs text-[var(--text-2)]">
                   No dataset versions available. Seed official data or import a
                   dataset first.
                 </p>
@@ -220,7 +220,7 @@ export default function Mldashboard() {
 
           <Reveal delay={80}>
             <Card>
-              <h3 className="mb-4 text-sm font-semibold text-brand-900/70">
+              <h3 className="mb-4 text-sm font-semibold text-[var(--text-1)]">
                 Active model
               </h3>
               {model ? (
@@ -250,7 +250,7 @@ export default function Mldashboard() {
                   />
                 </div>
               ) : (
-                <p className="text-sm text-brand-900/50">No model trained yet.</p>
+                <p className="text-sm text-[var(--text-2)]">No model trained yet.</p>
               )}
               {model?.metrics?.crossValidation && (
                 <CvBlock cv={model.metrics.crossValidation} />
@@ -260,13 +260,13 @@ export default function Mldashboard() {
 
           <Reveal delay={140}>
             <Card className="overflow-hidden p-0">
-              <div className="border-b border-brand-200 bg-brand-200/30 px-5 py-3.5">
-                <h3 className="text-sm font-semibold text-brand-900/80">
+              <div className="border-b border-[var(--border-2)] bg-[var(--surface-3)] px-5 py-3.5">
+                <h3 className="text-sm font-semibold text-[var(--text-1)]">
                   Training runs
                 </h3>
               </div>
               {runs.length === 0 ? (
-                <p className="px-5 py-6 text-sm text-brand-900/50">
+                <p className="px-5 py-6 text-sm text-[var(--text-2)]">
                   No training runs recorded.
                 </p>
               ) : (
@@ -290,10 +290,10 @@ export default function Mldashboard() {
                       {runs.map((r) => (
                         <tr
                           key={r.id}
-                          className="tr-hover border-b border-brand-200/50 last:border-0"
+                          className="tr-hover border-b border-[var(--border)] last:border-0"
                         >
                           <td className="td font-mono text-xs">#{r.id}</td>
-                          <td className="td font-medium text-brand-900">
+                          <td className="td font-medium text-[var(--text-1)]">
                             {r.dataset_version}
                           </td>
                           <td className="td">{r.algorithm}</td>
@@ -324,9 +324,9 @@ export default function Mldashboard() {
 
 function Metric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-xl border border-brand-200/70 bg-brand-50/50 p-3 transition-colors hover:bg-brand-100/60">
-      <p className="text-xs text-brand-900/45">{label}</p>
-      <p className="mt-0.5 truncate text-lg font-bold text-brand-900">{value}</p>
+    <div className="rounded-xl border border-[var(--border-2)] bg-[var(--surface-3)] p-3 transition-colors hover:bg-[var(--surface-4)]">
+      <p className="text-xs text-[var(--text-2)]">{label}</p>
+      <p className="mt-0.5 truncate text-lg font-bold text-[var(--text-1)]">{value}</p>
     </div>
   );
 }
@@ -358,7 +358,7 @@ function CvBlock({ cv }: { cv: CvMetrics }) {
 
 function MiniMetric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-mint-300/60 bg-white/60 p-2.5">
+    <div className="rounded-lg border border-[var(--border-2)] bg-[var(--surface-5)] p-2.5">
       <p className="text-[11px] text-mint-800/60">{label}</p>
       <p className={cn("mt-0.5 font-bold text-mint-800")}>{value}</p>
     </div>

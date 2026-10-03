@@ -27,7 +27,7 @@ const outDir = path.resolve(__dirname, "../../artifacts");
 const limitArg = process.argv.findIndex((a) => a === "--limit");
 const limit = limitArg !== -1 ? Number(process.argv[limitArg + 1] ?? 0) : 0;
 
-const SUB_KEYS = ["fsr", "gue", "pcs", "fqe", "wd", "rd"] as const;
+const SUB_KEYS = ["fsr", "gue", "gph", "pcs", "fqe", "wd", "rd"] as const;
 
 interface Row {
   file: string;

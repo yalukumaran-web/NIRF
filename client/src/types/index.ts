@@ -11,13 +11,38 @@ export interface Institution {
   category: string;
 }
 
+export interface TraceStep {
+  label: string;
+  equation: string;
+  result: number | string | null;
+}
+
+export interface TraceFlag {
+  severity: "info" | "warning" | "error";
+  message: string;
+}
+
 export interface SubScore {
   key: string;
   label: string;
+  officialName?: string;
+  domain?: string;
+  marks?: number;
   rawValue?: number;
+  normalized?: number;
   score: number | null;
   status: "ok" | "partial" | "insufficient_data";
+  excluded?: boolean;
   missingFields: string[];
+  formula?: string;
+  formulaRef?: string;
+  officiality?: "official" | "calibrated_approximation" | "requires_verification";
+  normalizationNote?: string;
+  explanation?: string;
+  contribution?: number | null;
+  maxContribution?: number;
+  steps?: TraceStep[];
+  flags?: TraceFlag[];
 }
 
 export interface ParameterScore {

@@ -69,7 +69,7 @@ export default function Calculations() {
         <Card className="animate-fade-up overflow-hidden p-0">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="text-left border-b border-brand-200 bg-brand-200/30">
+              <thead className="text-left border-b border-[var(--border-2)] bg-[var(--surface-3)]">
                 <tr>
                   <th className="th">Run</th>
                   <th className="th">Date</th>
@@ -84,11 +84,11 @@ export default function Calculations() {
                 {runs.map((r) => (
                   <tr
                     key={r.id}
-                    className="tr-hover border-b border-brand-200/50 last:border-0"
+                    className="tr-hover border-b border-[var(--border)] last:border-0"
                   >
                     <td className="td font-mono text-xs">#{r.id}</td>
                     <td className="td">{new Date(r.created_at).toLocaleString()}</td>
-                    <td className="td font-medium text-brand-900">
+                    <td className="td font-medium text-[var(--text-1)]">
                       {r.institution_name || "—"}
                     </td>
                     <td className="td">
@@ -96,8 +96,8 @@ export default function Calculations() {
                         {r.kind}
                       </Badge>
                     </td>
-                    <td className="td text-brand-900/55">{r.metrics_source}</td>
-                    <td className="td text-right font-bold text-brand-900">
+                    <td className="td text-[var(--text-2)]">{r.metrics_source}</td>
+                    <td className="td text-right font-bold text-[var(--text-1)]">
                       {r.final_score != null ? Number(r.final_score).toFixed(2) : "—"}
                     </td>
                     <td className="td text-right">

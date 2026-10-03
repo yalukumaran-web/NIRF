@@ -13,6 +13,7 @@ import documentRoutes from "./routes/documentRoutes";
 import calculationRoutes from "./routes/calculationRoutes";
 import mlRoutes from "./routes/mlRoutes";
 import absoluteRoutes from "./routes/absoluteRoutes";
+import relativeRoutes from "./routes/relativeRoutes";
 import publicRoutes from "./routes/publicRoutes";
 
 const app = express();
@@ -25,6 +26,9 @@ app.use("/api", publicRoutes);
 // Public, stateless absolute scoring — must mount before routers that apply
 // a blanket `router.use(requireAuth)` at their /api mount point.
 app.use("/api/absolute", absoluteRoutes);
+// Public, stateless relative-parameter prediction module — independent from
+// the Absolute (FSR/GUE/PCS/FQE/WD/RD) pipeline. ADDITIVE only.
+app.use("/api/relative", relativeRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api", scoreRoutes);
 app.use("/api", predictRoutes);

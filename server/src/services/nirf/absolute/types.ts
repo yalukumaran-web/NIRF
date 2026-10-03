@@ -7,16 +7,22 @@
  *
  *   FSR = 30 × min(15 × (F/N), 1)                       (TLR, 30 marks)
  *   GUE = 15 × min(Pooled Ng% / 80%, 1)                 (GO, 15 marks)
+ *   GPH = 40 × min(GPH_fraction, 1)                     (GO, 40 marks)
  *   PCS = Σ per-question facility marks, capped at 20   (OI, 20 marks)
  *   FQE = FQ(10) + FE(10)                               (TLR, 20 marks)
  *   WD  = 15×min(NWS/50%,1) + 15×min(NWF/20%,1)         (OI, 30 marks)
  *   RD  = 25×(OOS share) + 5×(OOC share)                (OI, 30 marks)
  *
+ * GPH (Placement & Higher Studies) uses the 9-column "Placement & higher
+ * studies" cohort tables (UG [4 Years], UG [5 Years], PG [2 Years],
+ * PG [3 Years]). Per cohort: ratio = (placed + higherStudies) / admitted;
+ * per program: 3-cohort mean; GPH_fraction = mean over program averages.
+ *
  * Contribution to the overall 100-point score:
  *   contribution = (subScore / subMaxMarks) × (subMaxMarks × parameterWeight)
  *   where parameterWeight is TLR=0.30, GO=0.20, OI=0.10.
- *   Max contributions: FSR 9.0, FQE 6.0, GUE 3.0, PCS 2.0, WD 3.0, RD 3.0
- *   → the six absolute sub-parameters top out at 26.0 points of the 100.
+ *   Max contributions: FSR 9.0, FQE 6.0, GUE 3.0, GPH 8.0, PCS 2.0, WD 3.0,
+ *   RD 3.0 → the seven absolute sub-parameters top out at 34.0 points of 100.
  */
 
 export type AbsoluteStatus = "computed" | "partial" | "unable";
@@ -41,6 +47,8 @@ export interface AbsoluteInput {
 export interface FacultyRosterRow {
   serial: number;
   designation: string;
+  /** Appointment type as printed in the Faculty Details table: "Regular" / "Adhoc-Contractual" / "Visiting" / … */
+  appointmentType?: string;
   gender: string;
   qualification: string;
   experienceMonths: number;
@@ -119,6 +127,7 @@ export const SUB_PARAMETER_MARKS = {
   fsr: 30,
   fqe: 20,
   gue: 15,
+  gph: 40,
   pcs: 20,
   wd: 30,
   rd: 30,

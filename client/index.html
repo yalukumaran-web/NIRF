@@ -3,7 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NIRF Ranking Calculator</title>
+    <title>NIRF Ranklab — Score &amp; Rank Predictor</title>
+    <meta name="description" content="Compute NIRF engineering rankings from your credentials PDF. Absolute and relative scoring with full arithmetic traceability." />
+    <script>
+      (function () {
+        try {
+          var s = localStorage.getItem("nirf-theme");
+          if (s !== "dark" && s !== "light") {
+            s = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+          }
+          document.documentElement.dataset.theme = s;
+        } catch (_) {}
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>

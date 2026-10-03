@@ -39,19 +39,19 @@ interface ExtractResponse {
 const SOURCE_META: Record<Source, { label: string; chip: string }> = {
   pdf: {
     label: "From PDF",
-    chip: "bg-mint-200/70 text-mint-800 border-mint-300/80",
+    chip: "bg-[var(--chip-success-bg)] text-[var(--chip-success-text)] border-[var(--chip-success-border)]",
   },
   estimated_default: {
     label: "Estimated",
-    chip: "bg-amber-100 text-amber-800 border-amber-300",
+    chip: "bg-[var(--chip-warn-bg)] text-[var(--text-active)] border-[var(--chip-warn-border)]",
   },
   missing: {
     label: "Missing",
-    chip: "bg-rose-100 text-rose-700 border-rose-200",
+    chip: "bg-[var(--chip-danger-bg)] text-[var(--chip-danger-text)] border-[var(--chip-danger-border)]",
   },
   requires_external_source: {
     label: "External source",
-    chip: "bg-violet-100 text-violet-700 border-violet-200",
+    chip: "bg-[var(--chip-violet-bg)] text-[var(--chip-violet-text)] border-[var(--chip-violet-border)]",
   },
 };
 
@@ -202,10 +202,10 @@ export default function Upload() {
   return (
     <>
       <PageHeader
-        title="Upload Credentials"
+        title="Upload &amp; Compute"
         description={`${institution?.name ?? ""} · ${institution?.category ?? ""} · ${user?.email ?? ""}`}
         actions={
-          <Badge tone="blue">
+          <Badge tone="amber">
             <span className="h-1.5 w-1.5 rounded-full bg-brand-500 animate-pulse-soft" />
             Review required
           </Badge>
@@ -229,27 +229,31 @@ export default function Upload() {
           <>
             <Reveal>
               <Card className="space-y-5">
-                <div>
-                  <label className="label" htmlFor="year">
-                    Score Year
-                  </label>
-                  <input
-                    id="year"
-                    type="number"
-                    value={year}
-                    onChange={(e) => setYear(Number(e.target.value))}
-                    className="input w-32"
-                  />
+                {/* Year selector */}
+                <div className="flex items-center gap-4">
+                  <div>
+                    <label className="label" htmlFor="year">
+                      Score Year
+                    </label>
+                    <input
+                      id="year"
+                      type="number"
+                      value={year}
+                      onChange={(e) => setYear(Number(e.target.value))}
+                      className="input w-32"
+                    />
+                  </div>
                 </div>
 
+                {/* PDF upload */}
                 <div>
-                  <label className="label">Upload NIRF credentials PDF</label>
+                  <label className="label">Upload NIRF Credentials PDF</label>
                   <label
                     className={cn(
-                      "group flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed px-6 py-10 text-center transition-all duration-300",
+                      "group flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed px-6 py-12 text-center transition-all duration-300",
                       uploading
-                        ? "border-brand-400 bg-brand-100/60"
-                        : "border-brand-300/70 bg-brand-50/60 hover:border-brand-400 hover:bg-brand-100/60"
+                        ? "border-brand-500/60 bg-brand-500/5"
+                        : "border-[var(--border-2)] bg-[var(--surface-5)] hover:border-brand-500/40 hover:bg-brand-500/5"
                     )}
                   >
                     <input
@@ -260,14 +264,14 @@ export default function Upload() {
                         e.target.files?.[0] && onFile(e.target.files[0])
                       }
                     />
-                    <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-brand-500 to-mint-500 text-white shadow-glow transition-transform duration-300 group-hover:scale-110">
+                    <span className="grid h-14 w-14 place-items-center rounded-2xl bg-brand-700 text-white shadow-glow transition-transform duration-300 group-hover:scale-110">
                       <Icon path={ICON.upload} className="h-6 w-6" />
                     </span>
-                    <span className="mt-4 text-sm font-semibold text-brand-900">
+                    <span className="mt-5 text-sm font-semibold text-[var(--text-1)]">
                       {uploading ? "Parsing PDF…" : "Choose a PDF or drop it here"}
                     </span>
-                    <span className="mt-1 text-xs text-brand-900/50">
-                      Structured credentials PDF · auto-fills most fields
+                    <span className="mt-1.5 text-xs text-[var(--text-fainter)]">
+                      Structured credentials PDF &mdash; auto-fills most fields
                     </span>
                   </label>
                 </div>
@@ -283,14 +287,14 @@ export default function Upload() {
             {extract && (
               <Reveal>
                 <Card className="space-y-4">
-                  <div className="flex flex-wrap items-start justify-between gap-3 border-b border-brand-200/70 pb-4">
+                  <div className="flex flex-wrap items-start justify-between gap-3 border-b border-[var(--border-2)] pb-4">
                     <div>
-                      <h2 className="font-bold text-brand-900">
-                        Extracted from “{extract.file.original}”
+                      <h2 className="font-bold text-[var(--text-1)]">
+                        Extracted from &ldquo;{extract.file.original}&rdquo;
                       </h2>
-                      <p className="mt-1 max-w-xl text-xs leading-relaxed text-brand-900/50">
-                        Values read verbatim from the PDF are shown as “From PDF”.
-                        Fields tagged “External source” must be supplied from
+                      <p className="mt-1.5 max-w-xl text-xs leading-relaxed text-[var(--text-faint)]">
+                        Values read verbatim from the PDF are shown as &ldquo;From PDF&rdquo;.
+                        Fields tagged &ldquo;External source&rdquo; must be supplied from
                         Scopus/WoS or NIRF survey data — the app never guesses
                         them. Review before computing.
                       </p>
@@ -325,13 +329,13 @@ export default function Upload() {
                       return (
                         <div
                           key={f.key}
-                          className="mb-3 animate-fade-up"
+                          className="mb-4 animate-fade-up"
                           style={{ animationDelay: `${idx * 20}ms` }}
                         >
-                          <div className="mb-1 flex items-center justify-between gap-2">
-                            <label className="block text-xs font-medium text-brand-900/70">
+                          <div className="mb-1.5 flex items-center justify-between gap-2">
+                            <label className="block text-xs font-medium text-[var(--text-dim)]">
                               {f.label}{" "}
-                              <span className="font-normal text-brand-900/35">
+                              <span className="font-normal text-[var(--text-fainter)]">
                                 ({f.parameter})
                               </span>
                               {f.required && (
@@ -353,9 +357,9 @@ export default function Upload() {
                                 type="checkbox"
                                 checked={!!checks[f.key]}
                                 onChange={() => toggleCheck(f.key)}
-                                className="h-4 w-4 rounded border-brand-300 accent-brand-600"
+                                className="h-4 w-4 rounded border-[var(--border-3)] accent-brand-500"
                               />
-                              <span className="text-xs text-brand-900/60">
+                              <span className="text-xs text-[var(--text-faint)]">
                                 Facilities available on campus
                               </span>
                             </div>
@@ -372,12 +376,12 @@ export default function Upload() {
                               className={cn(
                                 "input",
                                 isPdf &&
-                                  "border-mint-300/80 bg-mint-100/40 focus:border-mint-500 focus:ring-mint-400/25"
+                                  "border-emerald-900/60 bg-emerald-950/20 focus:border-emerald-600/50"
                               )}
                             />
                           )}
                           {basis && !isPdf && (
-                            <p className="mt-1 text-[10px] leading-snug text-brand-900/45">
+                            <p className="mt-1 text-[10px] leading-snug text-[var(--text-fainter)]">
                               {basis}
                             </p>
                           )}
@@ -403,7 +407,7 @@ export default function Upload() {
 
             {!hasInteraction && (
               <Reveal delay={120}>
-                <p className="text-sm text-brand-900/45">
+                <p className="text-sm text-[var(--text-faintest)]">
                   Upload a structured PDF to auto-fill most fields, then review
                   and confirm before computing.
                 </p>
@@ -429,43 +433,46 @@ function ResultView({
 }) {
   return (
     <Reveal>
-      <Card className="animate-scale-in py-10 text-center">
-        <p className="text-sm font-medium text-brand-900/55">Score Computed</p>
-        <p className="mt-2 text-center text-6xl font-extrabold tracking-tight text-gradient">
+      <Card className="animate-scale-in py-12 text-center relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-500/50 to-transparent" />
+        <div className="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2 h-40 w-40 rounded-full bg-brand-500/10 blur-3xl" />
+
+        <p className="text-xs font-semibold uppercase tracking-widest text-[var(--text-faint)]">Score Computed</p>
+        <p className="mt-4 text-center text-7xl font-extrabold tracking-tight text-gradient" style={{ fontFamily: "'Montserrat', sans-serif" }}>
           {result.finalScore !== null ? result.finalScore.toFixed(1) : "—"}
         </p>
-        <p className="mt-1 text-sm text-brand-900/40">Final NIRF Score / 100</p>
+        <p className="mt-2 text-sm text-[var(--text-fainter)]">Final NIRF Score / 100</p>
 
         {result.hasInsufficientData && (
-          <Alert tone="amber" className="mx-auto mt-4 max-w-lg text-left">
+          <Alert tone="amber" className="mx-auto mt-5 max-w-lg text-left">
             <strong>Insufficient data: </strong>
             {result.insufficientParams.join(", ")}
           </Alert>
         )}
 
-        <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-5">
+        <div className="mt-8 grid grid-cols-1 gap-3 md:grid-cols-5">
           {result.parameters.map((p) => (
             <div
               key={p.parameter}
-              className="rounded-xl border border-brand-200/70 bg-brand-50/50 p-3 transition-colors hover:bg-brand-100/60"
+              className="rounded-xl border border-[var(--border-2)] bg-[var(--surface-5)] p-3 transition-colors hover:border-brand-500/30 hover:bg-[var(--surface)]"
             >
-              <p className="text-xs font-bold uppercase tracking-wide text-brand-900/45">
+              <p className="text-xs font-bold uppercase tracking-wide text-[var(--text-faint)]">
                 {p.parameter}
               </p>
-              <p className="mt-0.5 text-xl font-bold text-brand-900">
+              <p className="mt-1 text-xl font-bold text-[var(--text-1)]">
                 {p.unweightedScore !== null ? p.weightedScore.toFixed(1) : "—"}
               </p>
-              <p className="text-xs text-brand-900/40">({p.weight * 100}% wt.)</p>
+              <p className="text-xs text-[var(--text-fainter)]">({p.weight * 100}% wt.)</p>
               {p.penalty ? (
-                <p className="text-xs font-medium text-rose-500">
-                  −{p.penalty} penalty
+                <p className="text-xs font-medium text-rose-400">
+                  -{p.penalty} penalty
                 </p>
               ) : null}
             </div>
           ))}
         </div>
 
-        <div className="mt-7 flex flex-wrap justify-center gap-3">
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
           <button onClick={onDone} className="btn-primary">
             View Dashboard
           </button>
@@ -473,7 +480,7 @@ function ResultView({
             <button
               onClick={onPredict}
               disabled={predicting}
-              className="btn-success"
+              className="btn-outline"
             >
               {predicting ? "Predicting…" : "Predict Rank"}
             </button>
@@ -494,44 +501,46 @@ function PredictionResultView({
   const pctScores = Object.entries(prediction.percentileScores);
   return (
     <Reveal>
-      <Card className="animate-scale-in py-10 text-center">
-        <p className="text-sm font-medium text-brand-900/55">Rank Prediction</p>
-        <p className="mt-2 text-6xl font-extrabold tracking-tight text-gradient">
+      <Card className="animate-scale-in py-12 text-center relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-500/50 to-transparent" />
+
+        <p className="text-xs font-semibold uppercase tracking-widest text-[var(--text-faint)]">Rank Prediction</p>
+        <p className="mt-4 text-7xl font-extrabold tracking-tight text-gradient" style={{ fontFamily: "'Montserrat', sans-serif" }}>
           #{prediction.predictedRank}
         </p>
-        <p className="mt-1 text-sm text-brand-900/40">Predicted NIRF Rank</p>
+        <p className="mt-2 text-sm text-[var(--text-fainter)]">Predicted NIRF Rank</p>
 
-        <div className="mx-auto mt-6 grid max-w-md grid-cols-2 gap-4 text-left">
-          <div className="rounded-xl border border-brand-200/70 bg-brand-50/50 p-3">
-            <p className="text-xs text-brand-900/50">Composite Score</p>
-            <p className="mt-0.5 text-lg font-bold text-brand-900">
+        <div className="mx-auto mt-8 grid max-w-md grid-cols-2 gap-4 text-left">
+          <div className="rounded-xl border border-[var(--border-2)] bg-[var(--surface-5)] p-4">
+            <p className="text-xs text-[var(--text-fainter)] uppercase tracking-wide">Composite Score</p>
+            <p className="mt-1.5 text-2xl font-bold text-[var(--text-1)]">
               {(prediction.composite * 100).toFixed(1)}
             </p>
           </div>
-          <div className="rounded-xl border border-mint-300/60 bg-mint-100/40 p-3">
-            <p className="text-xs text-mint-800/60">Confidence</p>
-            <p className="mt-0.5 text-lg font-bold text-mint-800">
+          <div className="rounded-xl border border-brand-700/40 bg-brand-500/5 p-4">
+            <p className="text-xs text-brand-600 uppercase tracking-wide">Confidence</p>
+            <p className="mt-1.5 text-2xl font-bold text-brand-400">
               {(prediction.confidence * 100).toFixed(0)}%
             </p>
           </div>
         </div>
 
-        <div className="mx-auto mt-6 max-w-lg text-left">
-          <h3 className="mb-2 text-sm font-semibold text-brand-900/70">
+        <div className="mx-auto mt-8 max-w-lg text-left">
+          <h3 className="mb-3 text-xs font-semibold uppercase tracking-widest text-[var(--text-faint)]">
             Feature Percentiles
           </h3>
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             {pctScores.map(([key, val]) => (
               <div key={key}>
-                <div className="flex justify-between text-xs">
-                  <span className="text-brand-900/55">{key}</span>
-                  <span className="font-semibold text-brand-900">
+                <div className="flex justify-between text-xs mb-1">
+                  <span className="text-[var(--text-faint)]">{key}</span>
+                  <span className="font-semibold text-[var(--text-2)]">
                     {(val * 100).toFixed(1)}%
                   </span>
                 </div>
-                <div className="mt-0.5 h-1.5 overflow-hidden rounded-full bg-brand-200/60">
+                <div className="h-1 overflow-hidden rounded-full bg-[var(--surface-3)]">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-brand-500 to-mint-500 transition-all duration-700"
+                    className="h-full rounded-full bg-gradient-to-r from-brand-500 to-brand-300 transition-all duration-700"
                     style={{ width: `${Math.max(2, val * 100)}%` }}
                   />
                 </div>
@@ -541,18 +550,18 @@ function PredictionResultView({
         </div>
 
         {prediction.missing.length > 0 && (
-          <Alert tone="amber" className="mx-auto mt-4 max-w-lg text-left">
+          <Alert tone="amber" className="mx-auto mt-5 max-w-lg text-left">
             <strong>Missing fields: </strong>
             {prediction.missing.join(", ")}
           </Alert>
         )}
 
-        <p className="mt-4 text-xs text-brand-900/40">
-          Model: {prediction.model.n} institutions, Spearman r ={" "}
+        <p className="mt-5 text-xs text-[var(--text-faintest)]">
+          Model: {prediction.model.n} institutions &middot; Spearman r ={" "}
           {prediction.model.spearmanR.toFixed(3)}
         </p>
 
-        <button onClick={onDone} className="btn-primary mt-6">
+        <button onClick={onDone} className="btn-primary mt-7">
           View Dashboard
         </button>
       </Card>

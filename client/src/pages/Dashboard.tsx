@@ -25,11 +25,11 @@ import {
 } from "recharts";
 
 const COLORS: Record<string, string> = {
-  TLR: "#4970C8",
-  RP: "#8258E5",
-  GO: "#448763",
-  OI: "#D97706",
-  PR: "#E11D48",
+  TLR: "#830000",
+  RP: "#A51F1F",
+  GO: "#C93837",
+  OI: "#275889",
+  PR: "#10253F",
 };
 
 interface PredictionRow {
@@ -85,8 +85,8 @@ export default function Dashboard() {
         title="Dashboard"
         description={`${institution?.name ?? ""} · ${institution?.category ?? ""} · ${user?.email ?? ""}`}
         actions={
-          <Badge tone="green">
-            <span className="h-1.5 w-1.5 rounded-full bg-mint-500 animate-pulse-soft" />
+          <Badge tone="gold">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand-500 animate-pulse-soft" />
             Session active
           </Badge>
         }
@@ -100,7 +100,7 @@ export default function Dashboard() {
         <EmptyState
           title="No score computed yet"
           description="Upload your institution credentials (PDF) or enter metrics to compute your NIRF ranking."
-          action={{ label: "Go to Upload", to: "/upload" }}
+          action={{ label: "Upload & Compute", to: "/upload" }}
         />
       )}
     </>
@@ -175,21 +175,27 @@ function ScoreOverview({
     <div className="space-y-6">
       <Reveal>
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
-          <Card className="relative overflow-hidden flex flex-col items-center justify-center py-8 text-center animate-fade-up">
-            <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-brand-200/70 blur-2xl" />
-            <div className="pointer-events-none absolute -bottom-12 -left-8 h-32 w-32 rounded-full bg-mint-200/70 blur-2xl" />
-            <p className="relative text-sm font-medium text-brand-900/55">
+          {/* Score hero card */}
+          <Card className="relative overflow-hidden flex flex-col items-center justify-center py-10 text-center animate-fade-up">
+            <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-brand-500/8 blur-2xl" />
+            <div className="pointer-events-none absolute -bottom-12 -left-8 h-40 w-40 rounded-full bg-brand-500/6 blur-2xl" />
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-500/40 to-transparent" />
+            <p className="relative text-xs font-semibold uppercase tracking-widest text-[var(--text-dim)]">
               Final NIRF Score
             </p>
-            <p className="relative mt-1 text-6xl font-extrabold tracking-tight text-brand-900">
-              {latest.finalScore !== null ? latest.finalScore.toFixed(1) : "—"}
+            <p className="relative mt-3 text-6xl font-extrabold tracking-tight text-[var(--text-1)]" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+              {latest.finalScore !== null ? (
+                <>
+                  <span className="text-gradient">{latest.finalScore.toFixed(1)}</span>
+                </>
+              ) : "—"}
             </p>
-            <p className="relative text-xs text-brand-900/40">
+            <p className="relative mt-1 text-xs text-[var(--text-faint)]">
               {latest.finalScore === null
                 ? "Insufficient data to finalize"
                 : "out of 100"}
             </p>
-            <div className="relative mt-3 flex flex-wrap justify-center gap-1.5">
+            <div className="relative mt-4 flex flex-wrap justify-center gap-1.5">
               {latest.hasInsufficientData && (
                 <Badge tone="amber">
                   {partialCount} parameter{partialCount === 1 ? "" : "s"} partial
@@ -198,41 +204,45 @@ function ScoreOverview({
             </div>
           </Card>
 
-          <Card className="animate-fade-up" >
-            <h3 className="text-sm font-semibold text-brand-900/70 mb-2">
+          {/* Radar chart */}
+          <Card className="animate-fade-up">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-[var(--text-dim)]">
               Parameter Radar
-            </h3>
+            </p>
             <ResponsiveContainer width="100%" height={220}>
               <RadarChart data={radarData}>
-                <PolarGrid stroke="rgba(30,42,74,.12)" />
+                <PolarGrid stroke="rgba(131,0,0,0.15)" />
                 <PolarAngleAxis
                   dataKey="subject"
-                  tick={{ fill: "#334B8A", fontSize: 12 }}
+                  tick={{ fill: "#7E7E7E", fontSize: 12 }}
                 />
                 <Radar
                   dataKey="A"
-                  stroke="#4970C8"
-                  fill="#4970C8"
-                  fillOpacity={0.35}
+                  stroke="#830000"
+                  fill="#830000"
+                  fillOpacity={0.15}
                   strokeWidth={2}
                 />
               </RadarChart>
             </ResponsiveContainer>
           </Card>
 
+          {/* Bar chart */}
           <Card className="animate-fade-up">
-            <h3 className="text-sm font-semibold text-brand-900/70 mb-2">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-[var(--text-dim)]">
               Weighted Contribution
-            </h3>
+            </p>
             <ResponsiveContainer width="100%" height={220}>
               <BarChart data={barData}>
-                <XAxis dataKey="name" tick={{ fill: "#334B8A", fontSize: 11 }} />
-                <YAxis tick={{ fill: "#334B8A", fontSize: 11 }} />
+                <XAxis dataKey="name" tick={{ fill: "#888888", fontSize: 11 }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fill: "#888888", fontSize: 11 }} axisLine={false} tickLine={false} />
                 <Tooltip
-                  cursor={{ fill: "rgba(216,229,247,.5)" }}
+                  cursor={{ fill: "rgba(131,0,0,0.05)" }}
                   contentStyle={{
                     borderRadius: 12,
-                    border: "1px solid #B4CAEE",
+                    border: "1px solid #2A2A2A",
+                    background: "#141414",
+                    color: "#E8E8E8",
                     fontSize: 13,
                   }}
                 />
@@ -247,7 +257,7 @@ function ScoreOverview({
         </div>
       </Reveal>
 
-      {/* Parameter cards with drill-down */}
+      {/* Parameter drill-down cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4">
         {latest.parameters.map((p, i) => (
           <Reveal key={p.parameter} delay={i * 70}>
@@ -256,15 +266,16 @@ function ScoreOverview({
         ))}
       </div>
 
+      {/* Score History table */}
       {scores.length > 1 && (
         <Reveal>
           <Card>
-            <h3 className="text-sm font-semibold text-brand-900/70 mb-3">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[var(--text-dim)] mb-4">
               Score History
-            </h3>
+            </p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <thead className="text-left border-b border-brand-200">
+                <thead className="text-left border-b border-[var(--border-2)]">
                   <tr>
                     <th className="th">Year</th>
                     <th className="th">TLR</th>
@@ -277,14 +288,14 @@ function ScoreOverview({
                 </thead>
                 <tbody>
                   {scores.map((s) => (
-                    <tr key={s.id} className="tr-hover border-b border-brand-200/50 last:border-0">
+                    <tr key={s.id} className="tr-hover border-b border-[var(--border)] last:border-0">
                       <td className="td">{s.year}</td>
                       <td className="td">{s.tlr != null ? Number(s.tlr).toFixed(1) : "—"}</td>
                       <td className="td">{s.rp != null ? Number(s.rp).toFixed(1) : "—"}</td>
                       <td className="td">{s.go != null ? Number(s.go).toFixed(1) : "—"}</td>
                       <td className="td">{s.oi != null ? Number(s.oi).toFixed(1) : "—"}</td>
                       <td className="td">{s.pr != null ? Number(s.pr).toFixed(1) : "—"}</td>
-                      <td className="td font-bold text-brand-900">
+                      <td className="td font-bold text-brand-400">
                         {s.final_score != null ? Number(s.final_score).toFixed(1) : "—"}
                       </td>
                     </tr>
@@ -296,15 +307,16 @@ function ScoreOverview({
         </Reveal>
       )}
 
+      {/* Rank Predictions */}
       {predictions.length > 0 && (
         <Reveal>
           <Card>
-            <h3 className="text-sm font-semibold text-brand-900/70 mb-3">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[var(--text-dim)] mb-4">
               Rank Predictions
-            </h3>
+            </p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <thead className="text-left border-b border-brand-200">
+                <thead className="text-left border-b border-[var(--border-2)]">
                   <tr>
                     <th className="th">Date</th>
                     <th className="th">Source</th>
@@ -315,15 +327,15 @@ function ScoreOverview({
                 </thead>
                 <tbody>
                   {predictions.map((p) => (
-                    <tr key={p.id} className="tr-hover border-b border-brand-200/50 last:border-0">
+                    <tr key={p.id} className="tr-hover border-b border-[var(--border)] last:border-0">
                       <td className="td">
                         {new Date(p.created_at).toLocaleDateString()}
                       </td>
-                      <td className="td text-brand-900/50 truncate max-w-[200px]">
+                      <td className="td text-[var(--text-faint)] truncate max-w-[200px]">
                         {p.source_file}
                       </td>
                       <td className="td">
-                        <Badge tone="violet">#{p.predicted_rank}</Badge>
+                        <Badge tone="gold">#{p.predicted_rank}</Badge>
                       </td>
                       <td className="td">{(p.composite * 100).toFixed(1)}</td>
                       <td className="td">{(p.confidence * 100).toFixed(0)}%</td>
@@ -343,60 +355,65 @@ function ParameterCard({ param }: { param: ParameterScore }) {
   const [open, setOpen] = useState(false);
   const color = COLORS[param.parameter];
   return (
-    <Card className="group transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift animate-fade-up">
+    <Card className="group transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift animate-fade-up hover:border-[var(--border-3)]">
+      {/* Top accent line */}
+      <div
+        className="absolute inset-x-0 top-0 h-px rounded-t-2xl"
+        style={{ background: `linear-gradient(90deg, transparent, ${color}60, transparent)` }}
+      />
       <div className="flex items-center justify-between">
         <span
-          className="inline-flex items-center gap-1.5 rounded-lg px-2 py-0.5 text-sm font-bold"
-          style={{ color, backgroundColor: `${color}18` }}
+          className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-sm font-bold"
+          style={{ color, backgroundColor: `${color}15`, border: `1px solid ${color}30` }}
         >
           {param.parameter}
         </span>
-        <span className="text-lg font-bold text-brand-900">
+        <span className="text-lg font-bold text-[var(--text-1)]">
           {param.weightedScore != null
             ? Number(param.weightedScore).toFixed(1)
             : "—"}
         </span>
       </div>
-      <p className="mt-1 text-xs text-brand-900/40">{param.label}</p>
-      <p className="text-[11px] text-brand-900/50 mt-0.5">
+      <p className="mt-1.5 text-xs text-[var(--text-faint)]">{param.label}</p>
+      <p className="text-[11px] text-[var(--text-faint)] mt-0.5">
         {param.unweightedScore !== null
           ? `${Number(param.unweightedScore).toFixed(1)}/100 unweighted`
           : "—"}
       </p>
       {param.penalty ? (
-        <p className="mt-0.5 text-xs font-medium text-rose-500">
+        <p className="mt-0.5 text-xs font-medium text-rose-400">
           Penalty −{param.penalty}
         </p>
       ) : null}
       <button
         onClick={() => setOpen((o) => !o)}
-        className="mt-2 text-xs font-semibold text-brand-600 hover:text-brand-800 transition-colors"
+        className="mt-3 text-xs font-semibold text-brand-500 hover:text-brand-300 transition-colors"
       >
-        {open ? "Hide detail ▲" : "View detail ▼"}
+        {open ? "Hide details" : "View details"}
       </button>
       {open && (
-        <div className="mt-2 space-y-1.5 border-t border-brand-200/70 pt-2">
+        <div className="mt-3 space-y-1.5 border-t border-[var(--border-2)] pt-3">
           {param.subs.map((s) => (
             <div
               key={s.key}
               className="flex justify-between items-center text-xs"
             >
               <span
-                className="text-brand-900/60 truncate max-w-[140px]"
+                className="text-[var(--text-dim)] truncate max-w-[140px]"
                 title={s.label}
               >
                 {s.label}
               </span>
               {s.score !== null && !isNaN(Number(s.score)) ? (
-                <span className="font-medium text-brand-900">
+                <span className="font-medium text-[var(--text-2)]">
                   {Number(s.score).toFixed(1)}
                 </span>
               ) : (
                 <span
-                  className="font-medium text-amber-600"
+                  className="font-medium text-brand-600"
                   title={s.missingFields.join(", ")}
                 >
-                  insufficient data
+                  Insufficient data
                 </span>
               )}
             </div>

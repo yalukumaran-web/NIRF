@@ -1,0 +1,10 @@
+SR University	NOT AVAILABLE	NOT AVAILABLE
+Defence Institute of Advanced Technology	https://diat.ac.in/wp-content/uploads/2026/05/DEFENCE-INSTITUTE-OF-ADVANCED-TECHNOLOGY20250214-.pdf	pdfs/DIAT_Engineering_NIRF_2025.pdf
+Panjab University	NOT AVAILABLE	NOT AVAILABLE
+Jawaharlal Nehru Technological University	https://jntuh.ac.in/uploads/nirf/1.JawaharlalNehruTechnologicalUniversity20250214-ENGINEERING.pdf	pdfs/JNTU_Engineering_NIRF_2025.pdf
+C.V. Raman Global University, Odisha	https://cgu-odisha.ac.in/wp-content/uploads/2025/02/C.V.-Raman-Global-University-Odisha20250217-Engg-Copy-1.pdf	pdfs/CVRGU_Engineering_NIRF_2025.pdf
+Atal Bihari Vajpayee Indian Institute of Information Technology and Management	http://www.iiitm.ac.in/public/uploads/media_uploads/1770707558_Atal-Bihari-Vajpayee-Indian-Institute-of-Information-Technology-and-Management20250109-Engineering.pdf	pdfs/ABVIIITM_Engineering_NIRF_2025.pdf
+National Institute of Technology Hamirpur	https://nith.ac.in/uploads/files/nirf/NIRF%2025_Engg_NITH.pdf	pdfs/NITHamirpur_Engineering_NIRF_2025.pdf
+Pandit Deendayal Energy University	https://api.pdeu.ac.in/pdpu/resources/pdeu-nirf-2025-engineering.pdf	pdfs/PDEU_Engineering_NIRF_2025.pdf
+National Institute of Technology Puducherry	https://www.nitpy.ac.in/assets/docs/academics/nirf/2025/Engineering.pdf	pdfs/NITPuducherry_Engineering_NIRF_2025.pdf
+Sri Krishna College of Engineering and Technology	https://skcet.ac.in/wp-content/uploads/2025/02/NIRF_2025_ENGG.pdf	pdfs/SKCET_Engineering_NIRF_2025.pdf

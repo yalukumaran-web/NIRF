@@ -39,6 +39,9 @@ export const rawMetricsSchema = z.object({
   pcsFacilities: z.boolean().nullable().optional(),
   // PR
   perceptionScore: z.number().min(0).max(100).nullable().optional(),
+  /** Sub-parameter keys to deliberately exclude from the score (absolute-methodology
+   *  parameters skipped in the relative PDF flow). Not persisted as a metric. */
+  excludedSubParameters: z.array(z.string()).optional(),
 });
 
 export type RawMetricsInput = z.infer<typeof rawMetricsSchema>;

@@ -64,6 +64,8 @@ function flag(severity: Flag["severity"], message: string): Flag {
   return { severity, message };
 }
 
+const EXCLUDED_DESIGNATIONS = /^(others?|other)$/i;
+
 const TEACHING_DESIGNATIONS = new Set([
   "Professor",
   "Associate Professor",
@@ -71,7 +73,7 @@ const TEACHING_DESIGNATIONS = new Set([
 ]);
 
 function isTeaching(d: string): boolean {
-  return TEACHING_DESIGNATIONS.has(d.trim());
+  return !EXCLUDED_DESIGNATIONS.test(d.trim());
 }
 
 function isPhD(q: string): boolean {
@@ -137,77 +139,139 @@ function closeOut(
 
 // ──────────────────────────────────────────────────────────────────────────
 // 1. FSR — Faculty-Student Ratio (30 marks, TLR weight 30%)
-//    FSR = 30 × min(15 × (F/N), 1)
-//    F  = count of teaching-faculty roster rows (designation filter)
-//    NT = Σ "Total" across all UG/PG rows (Total Actual Student Strength)
+//    FSR = 30 × min(15 × (F/N), 1)   [full 30 once F/N ≥ 1/15]
+//      override: N/F > 50 (F/N < 1/50) ⇒ FSR = 0
+//    F  = count of roster rows that are currently working AND
+//         Appointment Type = "Regular" AND Experience ≥ 12 months
+//    NT = Σ "Total" of the UG [4 Years], UG [5 Years] and PG [2 Years]
+//         rows only (Total Actual Student Strength)
 //    Np = Full-Time + Part-Time PhD (Ph.D Student Details)
 //    N  = NT + Np
 // ──────────────────────────────────────────────────────────────────────────
+
+const REGULAR_APPOINTMENT_RE = /^regular$/i;
+
+function isRegularAppointment(a: string | null | undefined): boolean {
+  return typeof a === "string" && REGULAR_APPOINTMENT_RE.test(a.trim());
+}
+
+/** The student-strength program rows that enter the FSR denominator.
+ *  The match is anchored to the program header but tolerates trailing content
+ *  (extracted labels must never carry the numeric cells, but manually-supplied
+ *  labels may); the header token alone decides the program. */
+const FSR_STUDENT_PROGRAMS: { key: string; re: RegExp }[] = [
+  { key: "UG [4 Years Program(s)]", re: /^UG\s*\[\s*4\s*Years?\s*Program\(s\)\s*\](?:[\s\S]*)$/i },
+  { key: "UG [5 Years Program(s)]", re: /^UG\s*\[\s*5\s*Years?\s*Program\(s\)\s*\](?:[\s\S]*)$/i },
+  { key: "PG [2 Years Program(s)]", re: /^PG\s*\[\s*2\s*Years?\s*Program\(s\)\s*\](?:[\s\S]*)$/i },
+];
 
 function computeFsr(i: AbsoluteInput): SubParamResult {
   const r = makeResult("fsr", "Faculty-Student Ratio", "TLR");
   r.sourceTables = ["Faculty Details (roster)", "Total Actual Student Strength", "Ph.D Student Details"];
 
   const rosterRows = i.facultyRoster ?? [];
-  const teachingDesignation = rosterRows.filter((row) => isTeaching(row.designation));
-  const teachingWorking = teachingDesignation.filter((row) => row.working);
-  const notWorking = teachingDesignation.length - teachingWorking.length;
-  const F = teachingWorking.length;
-  r.steps.push(
-    step(
-      "F — teaching-faculty count",
-      `rows where Designation ∈ {Professor, Associate Professor, Assistant Professor} ∩ currently working = ${teachingWorking.length}`,
-      F
-    )
-  );
-  if (rosterRows.length > 0) {
-    const excluded = rosterRows.filter((row) => !isTeaching(row.designation));
-    if (excluded.length > 0) {
+  if (rosterRows.length === 0) {
+    if (isNum(i.facultySummary)) {
       r.flags.push(
         flag(
-          "info",
-          `Excluded ${excluded.length} roster row(s) whose Designation is not in {Professor, Associate Professor, Assistant Professor} (admin/adjunct "Other"); not counted in F.`
+          "warning",
+          "Faculty Details roster table is ABSENT — only the 'Number of faculty members entered' summary count exists. The Currently Working / Appointment Type / Experience filters cannot be applied, so F cannot be derived verbatim from the source table."
         )
       );
     }
-    if (notWorking > 0) {
-      r.flags.push(
-        flag(
-          "info",
-          `Excluded ${notWorking} roster row(s) with a teaching designation whose "currently working" flag is "No"; not counted in F.`
-        )
-      );
-    }
-  } else if (isNum(i.facultySummary)) {
-    r.flags.push(
-      flag(
-        "warning",
-        "Faculty Details roster table is ABSENT — only the 'Number of faculty members entered' summary count exists. The designation filter cannot be applied, so F cannot be derived verbatim from the source table."
-      )
-    );
-    r.missingTables.push("Faculty Details (row-wise roster)");
-    return closeOut(r, null, "unable");
-  } else {
     r.missingTables.push("Faculty Details (row-wise roster)");
     return closeOut(r, null, "unable");
   }
 
-  // NT from student-strength "Total" column
-  const ntRows = (i.studentStrength ?? []).map((row) => row.total);
-  const NT = ntRows.length > 0 ? sumOrNull(ntRows) : null;
-  if (NT === null) {
-    r.missingTables.push("Total Actual Student Strength (Total column)");
+  // ── STEP 1 — F = permanent faculty (currently working ∩ Regular ∩ ≥12 months).
+  r.steps.push(
+    step("F — STEP 1.1 Total faculty rows", `${rosterRows.length} row(s) in the Faculty Details table`, rosterRows.length)
+  );
+
+  const workingRows = rosterRows.filter((row) => row.working);
+  r.steps.push(step("F — STEP 1.2 Currently Working = Yes", `${workingRows.length} of ${rosterRows.length} row(s)`, workingRows.length));
+  const notWorking = rosterRows.length - workingRows.length;
+  if (notWorking > 0) {
     r.flags.push(
-      flag("error", "NT cannot be summed — the 'Total' column is absent/blank in the Total Actual Student Strength table.")
-    );
-  } else {
-    r.steps.push(
-      step(
-        "NT — total student strength (UG/PG)",
-        ntRows.map((v) => String(v)).join(" + ") + ` = ${NT}`,
-        NT
+      flag(
+        "info",
+        `Excluded ${notWorking} roster row(s) whose "Currently working with the Institution" is "No"; not counted in F.`
       )
     );
+  }
+
+  const regularRows = workingRows.filter((row) => isRegularAppointment(row.appointmentType));
+  r.steps.push(step("F — STEP 1.3 Appointment Type = Regular", `${regularRows.length} of ${workingRows.length} working row(s)`, regularRows.length));
+  const nonRegularCount = workingRows.length - regularRows.length;
+  if (nonRegularCount > 0) {
+    const kinds = workingRows
+      .filter((row) => !isRegularAppointment(row.appointmentType))
+      .map((row) => (row.appointmentType ?? "").trim() || "(blank)")
+      .filter((v, idx, arr) => arr.indexOf(v) === idx);
+    r.flags.push(
+      flag(
+        "info",
+        `Excluded ${nonRegularCount} working roster row(s) whose Appointment Type is not "Regular" (${kinds.join(", ")}); not counted in F.`
+      )
+    );
+  }
+
+  const F = regularRows.filter((row) => isNum(row.experienceMonths) && row.experienceMonths >= 12).length;
+  const under12 = regularRows.filter((row) => isNum(row.experienceMonths) && row.experienceMonths < 12).length;
+  const blankExp = regularRows.filter((row) => !isNum(row.experienceMonths)).length;
+  const expDetail = regularRows.length
+    ? ` with Experience (In Months): ≥12 ⇒ ${F}, <12 ⇒ ${under12}, blank ⇒ ${blankExp}`
+    : " (no regular working rows)";
+  r.steps.push(step("F — STEP 1.4 Experience ≥ 12 months", `${regularRows.length} regular working row(s)${expDetail}`, F));
+  const juniorOrBlank = regularRows.length - F;
+  if (juniorOrBlank > 0) {
+    r.flags.push(
+      flag(
+        "info",
+        `Excluded ${juniorOrBlank} regular working roster row(s) whose Experience (In Months) is below 12 or blank (joined less than a year ago / unknown); not counted in F.`
+      )
+    );
+  }
+  r.steps.push(step("F — permanent faculty count", `working ${workingRows.length} ∩ Regular ${regularRows.length} ∩ ≥12 months = ${F}`, F));
+
+  // ── STEP 2 — N = NT + Np.
+  // NT sums ONLY the Total column of the FSR program rows (UG [4 Years], UG [5 Years], PG [2 Years]).
+  const ntParts: { key: string; value: number | null }[] = [];
+  const excludedLabels: string[] = [];
+  for (const row of i.studentStrength ?? []) {
+    const key = FSR_STUDENT_PROGRAMS.find((p) => p.re.test((row.label ?? "").trim()))?.key;
+    if (key) ntParts.push({ key: key, value: row.total });
+    else excludedLabels.push(row.label);
+  }
+  if (excludedLabels.length > 0) {
+    r.flags.push(
+      flag(
+        "info",
+        `FSR's denominator N includes ONLY the UG [4 Years], UG [5 Years] and PG [2 Years] student-strength rows plus Ph.D; the other student-strength row(s) are excluded: ${excludedLabels.join("; ")}.`
+      )
+    );
+  }
+
+  const NT = ntParts.length > 0 ? sumOrNull(ntParts.map((p) => p.value)) : null;
+  if (ntParts.length === 0) {
+    r.missingTables.push("Total Actual Student Strength (UG [4 Years] / UG [5 Years] / PG [2 Years] rows)");
+    r.flags.push(
+      flag(
+        "error",
+        "NT cannot be summed — none of the FSR student rows (UG [4 Years Program(s)], UG [5 Years Program(s)], PG [2 Year Program(s)]) is present in the Total Actual Student Strength table."
+      )
+    );
+  } else if (NT === null) {
+    r.missingTables.push("Total Actual Student Strength (Total column)");
+    r.flags.push(
+      flag(
+        "error",
+        "NT cannot be summed — a required 'Total' cell is blank in one of the FSR student rows (UG [4 Years] / UG [5 Years] / PG [2 Years]); blanks are never treated as zero."
+      )
+    );
+  } else {
+    const detail = ntParts.map((p) => `${p.key}: ${p.value}`).join(" + ");
+    r.steps.push(step("NT — UG/PG students in FSR denominator", detail + ` = ${NT}`, NT));
   }
 
   // Np from PhD details
@@ -235,31 +299,50 @@ function computeFsr(i: AbsoluteInput): SubParamResult {
   }
 
   const N = NT + Np;
-  r.steps.push(step("N — total students (excl. lateral aggregation)", `NT ${NT} + Np ${Np} = ${N}`, N));
+  r.steps.push(step("N — total students (FSR denominator)", `NT ${NT} + Np ${Np} = ${N}`, N));
 
-  if (F === 0) {
+  // ── STEP 3 — FSR = 30 × min(15 × (F/N), 1); override to 0 when N/F > 50.
+  if (F > 0 && N / F > 50) {
     r.flags.push(
-      flag("warning", "F = 0 (no teaching-faculty rows in roster). FSR = 0 from genuine data, not a missing table.")
+      flag(
+        "warning",
+        `N/F = ${r4(N / F)} > 50 (i.e. F/N = ${r4(F / N)} < 1/50) — the methodology sets FSR = 0 when the faculty:student ratio is this low.`
+      )
     );
-    r.steps.push(step("ratio", `15 × (${F}/${N}) = 15 × ${r4(0)} = 0`, 0));
+    r.steps.push(step("override N/F > 50 → FSR = 0", `N/F = ${N}/${F} = ${r4(N / F)} > 50 → FSR = 0`, 0));
     return closeOut(r, 0, "computed");
   }
 
-  const rawRatio = (15 * F) / N;
-  const uncapped = 30 * rawRatio;
-  r.steps.push(step("ratio (uncapped)", `15 × (${F}/${N}) = 15 × ${r4(F / N)} = ${r4(rawRatio)}`, rawRatio));
-  r.steps.push(step("FSR (uncapped)", `30 × ${r4(rawRatio)} = ${r4(uncapped)}`, uncapped));
-  const capped = Math.min(uncapped, 30);
-  if (uncapped > 30) {
-    r.steps.push(step("cap min(·, 30)", `min(${r4(uncapped)}, 30) = ${r4(capped)}`, capped));
-  } else {
-    r.steps.push(step("cap min(·, 30)", `min(${r4(uncapped)}, 30) = ${r4(uncapped)} (no cap applied)`, capped));
+  if (F === 0) {
+    r.flags.push(
+      flag(
+        "warning",
+        "F = 0 (no currently-working Regular-appointment faculty with ≥ 12 months experience in the roster). FSR = 0 from genuine data, not a missing table."
+      )
+    );
+    r.steps.push(step("15 × (F/N)", `15 × (0/${N}) = 0`, 0));
+    r.steps.push(step("FSR", `30 × 0 = 0`, 0));
+    return closeOut(r, 0, "computed");
   }
+
+  const fOverN = F / N;
+  const ratioUncapped = 15 * fOverN;
+  r.steps.push(step("15 × (F/N)", `15 × (${F}/${N}) = 15 × ${r4(fOverN)} = ${r4(ratioUncapped)}`, ratioUncapped));
+  const ratioCapped = Math.min(ratioUncapped, 1);
+  if (ratioUncapped > 1) {
+    r.steps.push(step("min(15 × F/N, 1)", `min(${r4(ratioUncapped)}, 1) = ${r4(ratioCapped)} (cap applied)`, ratioCapped));
+  } else {
+    r.steps.push(step("min(15 × F/N, 1)", `min(${r4(ratioUncapped)}, 1) = ${r4(ratioCapped)} (no cap applied)`, ratioCapped));
+  }
+  const fsrUncapped = 30 * ratioCapped;
+  r.steps.push(step("FSR", `30 × ${r4(ratioCapped)} = ${r4(fsrUncapped)}`, fsrUncapped));
+  r.steps.push(step("Final score (rounded to 2 dp)", `${r4(fsrUncapped)} → ${round2(fsrUncapped)}`, round2(fsrUncapped)));
+
   return closeOut(
     r,
-    capped,
+    fsrUncapped,
     "computed",
-    `FSR = 30 × min(15 × (F/N), 1) with F=${F}, N=${N}.`
+    `FSR = 30 × min(15 × (F/N), 1) with F=${F} (currently working ∩ Regular appointment ∩ ≥12 months experience) and N=${N} (UG 4yr ${ntParts.find((p) => p.key === "UG [4 Years Program(s)]")?.value ?? "—"} + UG 5yr ${ntParts.find((p) => p.key === "UG [5 Years Program(s)]")?.value ?? "—"} + PG 2yr ${ntParts.find((p) => p.key === "PG [2 Years Program(s)]")?.value ?? "—"} + Ph.D ${Np}).`
   );
 }
 
@@ -393,6 +476,220 @@ function computeGue(i: AbsoluteInput): SubParamResult {
     capped,
     "computed",
     `GUE = 15 × min(Pooled Ng% / 80%, 1) pooling ${pool.length} cohort rows across ${perProgram.size} program duration(s).`
+  );
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// 2b. GPH — Placement & Higher Studies (40 marks, GO weight 20%)
+//    One "Placement & higher studies" cohort table per program duration
+//    (UG [4 Years], UG [5 Years], PG [2 Years], PG [3 Years]), for the
+//    3 most recent reported admit-year cohorts.
+//    Per cohort:
+//      N     = firstYearAdmitted + lateralAdmitted  (lateral absent → 0,
+//              the PG [2 Years] table has no lateral columns)
+//      ratio = (placed + higherStudies) / N
+//    Per program:   program_avg = mean of the cohort ratios
+//    Overall:       GPH_fraction = mean(UG4, UG5, PG2, PG3 program averages)
+//    GPH = 40 × min(GPH_fraction, 1)
+//    Column 7 (graduating in minimum stipulated time) feeds GUE only;
+//    the median-salary column is reference-only and never enters GPH.
+// ──────────────────────────────────────────────────────────────────────────
+
+const GPH_CANONICAL_PROGRAMS: { key: string; level: "UG" | "PG"; duration: number }[] = [
+  { key: "UG [4 Years Program(s)]", level: "UG", duration: 4 },
+  { key: "UG [5 Years Program(s)]", level: "UG", duration: 5 },
+  { key: "PG [2 Years Program(s)]", level: "PG", duration: 2 },
+  { key: "PG [3 Years Program(s)]", level: "PG", duration: 3 },
+];
+
+const GPH_PROGRAM_LABEL_RE = /^(UG|PG)\s*\[\s*(\d+)\s*Years?/i;
+
+/** Resolve a cohort's program label to a GPH program family, or null when it
+ *  is not one of the four GPH tables. */
+function gphProgramKey(label: string): { level: "UG" | "PG"; duration: number } | null {
+  const m = GPH_PROGRAM_LABEL_RE.exec(label.trim());
+  if (!m) return null;
+  const level = m[1].toUpperCase() === "UG" ? "UG" : "PG";
+  const duration = Number(m[2]);
+  return GPH_CANONICAL_PROGRAMS.some((p) => p.level === level && p.duration === duration)
+    ? { level, duration }
+    : null;
+}
+
+interface GphProgramGroup {
+  key: string;
+  level: "UG" | "PG";
+  duration: number;
+  cohorts: PlacementCohort[];
+}
+
+function computeGph(i: AbsoluteInput): SubParamResult {
+  const r = makeResult("gph", "Placement & Higher Studies (GPH)", "GO");
+  r.sourceTables = ["Placement & Higher Studies (per program duration, 3 most recent cohorts)"];
+
+  const cohorts = i.placementCohorts ?? [];
+  if (cohorts.length === 0) {
+    r.missingTables.push("Placement & Higher Studies cohort table");
+    return closeOut(r, null, "unable");
+  }
+  r.flags.push(
+    flag(
+      "info",
+      "GPH uses ONLY the admitted/lateral, placed and higher-studies columns. The 'No. of students graduating in minimum stipulated time' column feeds GUE, not GPH; the median-salary column is reference-only."
+    )
+  );
+
+  const groups = new Map<string, GphProgramGroup>();
+  let unclassified = 0;
+  for (const c of cohorts) {
+    const pk = gphProgramKey(c.program);
+    if (!pk) {
+      unclassified++;
+      continue;
+    }
+    const key = `${pk.level} [${pk.duration} Years Program(s)]`;
+    const g = groups.get(key) ?? { key, level: pk.level, duration: pk.duration, cohorts: [] };
+    g.cohorts.push(c);
+    groups.set(key, g);
+  }
+  if (unclassified > 0) {
+    r.flags.push(
+      flag(
+        "info",
+        `Ignored ${unclassified} cohort row(s) whose program is not one of the 4 GPH tables (UG [4 Years], UG [5 Years], PG [2 Years], PG [3 Years]).`
+      )
+    );
+  }
+  const known = [...groups.values()].sort((a, b) => {
+    const ra = GPH_CANONICAL_PROGRAMS.findIndex((p) => p.key === a.key);
+    const rb = GPH_CANONICAL_PROGRAMS.findIndex((p) => p.key === b.key);
+    return (ra === -1 ? 99 : ra) - (rb === -1 ? 99 : rb);
+  });
+  if (known.length === 0) {
+    r.missingTables.push("Placement & Higher Studies cohort table (9-column outcome rows, 4 GPH program tables)");
+    r.flags.push(
+      flag(
+        "error",
+        "No cohort row belongs to the 4 GPH program tables (UG [4 Years], UG [5 Years], PG [2 Years], PG [3 Years]). Placement & higher-studies data cannot be attributed to a program."
+      )
+    );
+    return closeOut(r, null, "unable");
+  }
+
+  const programAvgs: { key: string; avg: number }[] = [];
+  const contributedKeys: string[] = [];
+  const excludedRows: string[] = [];
+
+  for (const g of known) {
+    const sorted = [...g.cohorts].sort((a, b) => b.admitYear.localeCompare(a.admitYear));
+    const top3 = sorted.slice(0, 3);
+    if (top3.length < 3) {
+      r.flags.push(
+        flag("warning", `${g.key}: only ${top3.length} cohort row(s) found for the 3 most recent admit-years (expected 3).`)
+      );
+    }
+    if (g.cohorts.length > 3) {
+      r.flags.push(
+        flag(
+          "info",
+          `${g.key}: kept the 3 most recent admit-years (${top3.map((c) => c.admitYear).join(", ")}) and excluded ${g.cohorts.length - top3.length} older cohort row(s).`
+        )
+      );
+    }
+    r.steps.push(
+      step(
+        `cohorts selected — ${g.key}`,
+        `3 most recent admit-years: ${top3.map((c) => c.admitYear).join(", ")}`,
+        top3.length
+      )
+    );
+
+    const ratios: number[] = [];
+    for (const c of top3) {
+      if (!isNum(c.firstYearAdmitted)) {
+        excludedRows.push(`${g.key} (admit ${c.admitYear}) — 'admitted' cell blank`);
+        continue;
+      }
+      if (!isNum(c.placed)) {
+        excludedRows.push(`${g.key} (admit ${c.admitYear}) — 'placed' cell blank`);
+        continue;
+      }
+      if (!isNum(c.higherStudies)) {
+        excludedRows.push(`${g.key} (admit ${c.admitYear}) — 'higher studies' cell blank`);
+        continue;
+      }
+      // Lateral-entry columns are structurally absent from the PG [2 Years]
+      // table (and blank elsewhere) → absent lateral counts as 0.
+      const lateral = isNum(c.lateralAdmitted) ? c.lateralAdmitted : 0;
+      const N = c.firstYearAdmitted + lateral;
+      r.steps.push(step(`N — ${g.key} (admit ${c.admitYear})`, `admitted ${c.firstYearAdmitted} + lateral ${lateral} = ${N}`, N));
+      if (N <= 0) {
+        excludedRows.push(`${g.key} (admit ${c.admitYear}) — admitted total 0`);
+        continue;
+      }
+      const outcome = c.placed + c.higherStudies;
+      r.steps.push(step(`outcome count — ${g.key} (admit ${c.admitYear})`, `placed ${c.placed} + higher studies ${c.higherStudies} = ${outcome}`, outcome));
+      const ratio = outcome / N;
+      ratios.push(ratio);
+      r.steps.push(step(`cohort ratio — ${g.key} (admit ${c.admitYear})`, `${outcome} ÷ ${N} = ${r4(ratio)}`, ratio));
+    }
+    if (ratios.length === 0) {
+      r.flags.push(
+        flag("warning", `${g.key}: no usable cohort row among the 3 most recent admit-years — program average unavailable.`)
+      );
+      continue;
+    }
+    const avg = ratios.reduce((a, b) => a + b, 0) / ratios.length;
+    programAvgs.push({ key: g.key, avg });
+    contributedKeys.push(g.key);
+    r.steps.push(step(`program average — ${g.key}`, `mean(${ratios.map((x) => r4(x)).join(", ")}) = ${r4(avg)}`, avg));
+  }
+  if (excludedRows.length > 0) {
+    r.flags.push(
+      flag(
+        "warning",
+        `Cohort row(s) excluded from GPH — required cells blank or admitted total 0 (never treated as zero): ${excludedRows.join("; ")}.`
+      )
+    );
+  }
+
+  if (programAvgs.length === 0) {
+    r.flags.push(flag("error", "No program produced a usable placement/higher-studies average."));
+    return closeOut(r, null, "unable");
+  }
+
+  const missingPrograms = GPH_CANONICAL_PROGRAMS.filter((p) => !groups.has(p.key)).map((p) => p.key);
+  if (missingPrograms.length > 0) {
+    r.flags.push(
+      flag(
+        "warning",
+        `GPH averages over the available program table(s) only — program table(s) absent or without cohorts: ${missingPrograms.join("; ")}.`
+      )
+    );
+  }
+
+  const frac = programAvgs.reduce((a, p) => a + p.avg, 0) / programAvgs.length;
+  r.steps.push(
+    step("GPH fraction (mean of program averages)", `(${programAvgs.map((p) => r4(p.avg)).join(" + ")}) / ${programAvgs.length} = ${r4(frac)}`, frac)
+  );
+  const fracCapped = f(frac);
+  if (frac > 1) {
+    r.steps.push(step("cap min(fraction, 1)", `min(${r4(frac)}, 1) = ${r4(fracCapped)}`, fracCapped));
+  } else {
+    r.steps.push(step("cap min(fraction, 1)", `min(${r4(frac)}, 1) = ${r4(frac)} (no cap applied)`, fracCapped));
+  }
+  const uncapped = 40 * fracCapped;
+  r.steps.push(step("GPH", `40 × ${r4(fracCapped)} = ${r4(uncapped)}`, uncapped));
+  r.steps.push(step("Final score (rounded to 2 dp)", `${r4(uncapped)} → ${round2(uncapped)}`, round2(uncapped)));
+
+  const partial = contributedKeys.length < GPH_CANONICAL_PROGRAMS.length;
+  return closeOut(
+    r,
+    uncapped,
+    partial ? "partial" : "computed",
+    partial
+      ? `GPH computed from ${programAvgs.length}/${GPH_CANONICAL_PROGRAMS.length} program table(s) (${contributedKeys.join(", ")}); missing program table(s) are not part of the mean.`
+      : `GPH = 40 × min(GPH_fraction, 1) across ${GPH_CANONICAL_PROGRAMS.length} program tables × 3 cohort ratios each.`
   );
 }
 
@@ -746,6 +1043,7 @@ export function computeAbsolute(input: AbsoluteInput, opts: AbsoluteOptions = {}
   const subs: SubParamResult[] = [
     computeFsr(input),
     computeGue(input),
+    computeGph(input),
     computePcs(input),
     computeFqe(input),
     computeWd(input),
@@ -793,9 +1091,9 @@ export function computeAbsolute(input: AbsoluteInput, opts: AbsoluteOptions = {}
     methodologyNote:
       "Absolute parameters only (current-year data, no percentiles, no prior-year history). " +
       "Contribution to the 100-point overall = (subScore / subMaxMarks) × subMaxMarks × parameterWeight, " +
-      "with TLR=0.30, GO=0.20, OI=0.10 → the six listed here top out at 26.0 points.",
+      "with TLR=0.30, GO=0.20, OI=0.10 → the seven listed here top out at 34.0 points.",
   };
 }
 
 // Individual sub-parameter solvers (exported for targeted tests & server use).
-export { computeFsr, computeGue, computePcs, computeFqe, computeWd, computeRd };
+export { computeFsr, computeGue, computeGph, computePcs, computeFqe, computeWd, computeRd };

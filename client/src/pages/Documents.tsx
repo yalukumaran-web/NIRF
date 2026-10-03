@@ -71,7 +71,7 @@ export default function Documents() {
         <RevealCard>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="text-left border-b border-brand-200">
+              <thead className="text-left border-b border-[var(--border-2)]">
                 <tr>
                   <th className="th">ID</th>
                   <th className="th">File</th>
@@ -86,20 +86,20 @@ export default function Documents() {
                 {docs.map((d) => (
                   <tr
                     key={d.id}
-                    className="tr-hover border-b border-brand-200/50 last:border-0"
+                    className="tr-hover border-b border-[var(--border)] last:border-0"
                   >
                     <td className="td font-mono text-xs">#{d.id}</td>
                     <td className="td truncate max-w-[220px]">{d.original_name}</td>
                     <td className="td">
                       {d.format}
                       {d.format_confidence != null ? (
-                        <span className="text-brand-900/35 text-xs">
+                        <span className="text-[var(--text-faint)] text-xs">
                           {" "}
                           ({(d.format_confidence * 100).toFixed(0)}%)
                         </span>
                       ) : null}
                     </td>
-                    <td className="td text-brand-900/55">{d.quality}</td>
+                    <td className="td text-[var(--text-2)]">{d.quality}</td>
                     <td className="td text-right">{d.page_count ?? "—"}</td>
                     <td className="td">
                       <Badge tone={STATUS_TONES[d.status] || "slate"}>

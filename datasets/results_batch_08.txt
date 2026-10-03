@@ -1,0 +1,10 @@
+Banasthali Vidyapith	http://banasthali.org/banasthali/wcms/en/home/lower-menu/naac-accredation/nirf/BV_NIRF_Engineering_Data_-IR25-.pdf	pdfs/Banasthali_Engineering_NIRF_2025.pdf
+Indian Institute of Technology Bhilai	https://www.iitbhilai.ac.in/index.php?pid=report_engineering_2025	pdfs/IITBhilai_Engineering_NIRF_2025.pdf
+National Institute of Technology Srinagar	https://www.nitsri.ac.in/uploaded_files/NIT_Srinagar_Engineering_2025_.pdf	pdfs/NITSrinagar_Engineering_NIRF_2025.pdf
+University of Hyderabad	https://gadmin.uohyd.ac.in/?mdocs-file=6675	pdfs/UoH_Engineering_NIRF_2025.pdf
+M. S. Ramaiah Institute of Technology	http://www.msrit-iqac.com/assets/img/reports/NIRF/MSRIT-2025-Engg.pdf	pdfs/MSRIT_Engineering_NIRF_2025.pdf
+Christ University	https://christuniversity.in/uploads/userfiles/file/NIRF%20Engineering%202025.pdf	pdfs/Christ_Engineering_NIRF_2025.pdf
+Indian Institute of Technology Dharwad	https://www.iitdh.ac.in/sites/default/files/2025-02/NIRF2025_IITDH_Engineering.pdf	pdfs/IITDharwad_Engineering_NIRF_2025.pdf
+Rajiv Gandhi Institute of Petroleum Technology	https://rgipt.ac.in/site/writereaddata/siteContent/202502191507299112Engineering.pdf	pdfs/RGIPT_Engineering_NIRF_2025.pdf
+Sant Longowal Institute of Engineering & Technology	http://sliet.ac.in/wp-content/uploads/2025/02/SLIET-Longowal-NIRF-2025-DCF-Engineering.pdf	pdfs/SLIET_Engineering_NIRF_2025.pdf
+Vignan's Foundation for Science, Technology and Research	https://vignan.ac.in/nirf/NIRF%202025%20Engineering%20DCS.pdf	pdfs/Vignan_Engineering_NIRF_2025.pdf

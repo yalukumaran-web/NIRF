@@ -1,0 +1,10 @@
+Indian Institute of Technology Madras	https://www.iitm.ac.in/sites/default/files/NIRF/IITM_Engineering_2025_NIRF.pdf	pdfs/IITMadras_Engineering_NIRF_2025.pdf
+Indian Institute of Technology Delhi	https://home.iitd.ac.in/uploads/nirf/2025/NIRF%202025_Engineering_Indian%20Institute%20of%20Technology%20Delhi20250118-1.pdf	pdfs/IITDelhi_Engineering_NIRF_2025.pdf
+Indian Institute of Technology Bombay	https://www.iitb.ac.in/sites/default/files/2025-02/NIRF_IITBombay_2025_Engineering_Category.pdf	pdfs/IITBombay_Engineering_NIRF_2025.pdf
+Indian Institute of Technology Kanpur	https://www.iitk.ac.in/data/nirf/nirf-2025/Engineering-2025.pdf	pdfs/IITKanpur_Engineering_NIRF_2025.pdf
+Indian Institute of Technology Kharagpur	https://www.iitkgp.ac.in/assets/pdf/nirf25_engg.pdf	pdfs/IITKharagpur_Engineering_NIRF_2025.pdf
+Indian Institute of Technology Roorkee	https://iitr.ac.in/Careers/static/NIRF/2025/Engg-NIRF_2025.pdf	pdfs/IITRoorkee_Engineering_NIRF_2025.pdf
+Indian Institute of Technology Hyderabad	https://www.iith.ac.in/assets/files/NIRF-Reports/2025/Indian_Institute_of_Technology_Hyderabad_Engineering_2025.pdf	pdfs/IITHyderabad_Engineering_NIRF_2025.pdf
+Indian Institute of Technology Guwahati	https://www.iitg.ac.in/nirf/doc/NIRF_Engineering_2025.pdf	pdfs/IITGuwahati_Engineering_NIRF_2025.pdf
+National Institute of Technology Tiruchirappalli	https://www.nitt.edu/home/academics/nirf/nirf2025/NIRF2025-Engineering.pdf	pdfs/NITTiruchirappalli_Engineering_NIRF_2025.pdf
+Indian Institute of Technology (Banaras Hindu University) Varanasi	https://www.iitbhu.ac.in/contents/iitbhu/docs/nirf_2025_engg_report.pdf	pdfs/IITBHU_Engineering_NIRF_2025.pdf

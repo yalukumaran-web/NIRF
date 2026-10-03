@@ -1,0 +1,22 @@
+  How to open CMD:
+  Press  Win + R  →  type  cmd  →  press Enter
+
+cd "C:\Users\LAKSHMI YALINI K\OneDrive\Desktop\NIRF_ranking\server"
+npm run dev
+
+cd "C:\Users\LAKSHMI YALINI K\OneDrive\Desktop\NIRF_ranking\client"
+npm run dev
+
+------------------------------------------------------------
+  LOGIN CREDENTIALS
+------------------------------------------------------------
+
+  Admin Login:
+    Email    : admin@nirf.app
+    Password : admin12345
+
+  Demo Institution Login:
+    Email    : demo@institution.edu
+    Password : demo12345
+
+  App URL: http://localhost:5173

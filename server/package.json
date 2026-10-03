@@ -12,6 +12,7 @@
     "seed-raw-dataset": "tsx src/scripts/buildRawDataset.ts",
     "scan-dataset": "tsx src/scripts/scanDataset.ts",
     "train-absolute": "tsx src/scripts/trainAbsolute.ts",
+    "train:relative": "tsx src/scripts/trainRelative.ts",
     "seed-institutions": "tsx src/scripts/seedInstitutions.ts",
     "verify-engine": "tsx src/scripts/verifyEngine.ts",
     "create-admin": "tsx src/scripts/createAdmin.ts",

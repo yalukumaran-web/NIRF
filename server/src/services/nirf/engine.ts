@@ -37,7 +37,7 @@
 import { getMethodology } from "../../nirf/registry";
 import type { MethodologyContext, SubParameterDef } from "../../nirf/types";
 import type { RawMetrics, NIRFCategory } from "../../types/metrics";
-import type { ScoreResult, ParameterScore, SubScore, SubStatus } from "./types";
+import type { ScoreResult, ParameterScore, SubScore, SubStatus, Step, Flag } from "./types";
 
 // ── Helpers ──────────────────────────────────────────────────────
 
@@ -52,6 +52,19 @@ function ok(v: number): boolean {
 /** NIRF-style f(x) = min(max(x, 0), 1) — linear normalization capped at [0,1]. */
 function f(x: number): number {
   return Math.min(Math.max(x, 0), 1);
+}
+
+/** One transparent arithmetic step for the UI trace (values plugged in). */
+function st(label: string, equation: string, result: number | string | null): Step {
+  const r =
+    typeof result === "number" && Number.isFinite(result)
+      ? Math.round(result * 1000) / 1000
+      : result;
+  return { label, equation, result: r };
+}
+
+function flag(severity: Flag["severity"], message: string): Flag {
+  return { severity, message };
 }
 
 interface SubIndex {
@@ -75,15 +88,44 @@ function buildSubIndex(ctx: MethodologyContext): SubIndex {
  * Build a SubScore from a computed normalized value [0,1] carrying full
  * traceability. OK when no input is missing; PARTIAL when computable from a
  * subset of its inputs (missing inputs are listed, never zero-filled);
- * INSUFFICIENT_DATA when the value cannot be computed at all.
+ * INSUFFICIENT_DATA when the value cannot be computed at all. Transparency
+ * flags mirror the absolute module's messaging so the UI can render a missing /
+ * partial sub exactly like the absolute section.
  */
-function makeSub(def: SubParameterDef, paramCode: string, raw: number, missing: string[] = []): SubScore {
+function makeSub(
+  def: SubParameterDef,
+  paramCode: string,
+  raw: number,
+  missing: string[] = [],
+  steps: Step[] = []
+): SubScore {
   const computed = ok(raw);
   let status: SubStatus = "insufficient_data";
   if (computed) {
     status = missing.length === 0 ? "ok" : "partial";
   }
   const normalized = computed ? Math.min(Math.max(raw, 0), 1) : undefined;
+  const missingList = [...new Set(missing)];
+  const flags: Flag[] = [];
+  if (status === "partial") {
+    flags.push(
+      flag(
+        "warning",
+        `Partially computed — not available in the PDF/submission: ${missingList.join(
+          ", "
+        )}. Never fabricated; this parameter is renormalized over the marks that could be computed.`
+      )
+    );
+  } else if (status === "insufficient_data") {
+    flags.push(
+      flag(
+        "error",
+        `Insufficient data — not available in the PDF/submission: ${
+          missingList.join(", ") || "no inputs supplied"
+        }. Nothing was invented; 0 was NOT assigned.`
+      )
+    );
+  }
   return {
     key: def.key,
     label: def.label,
@@ -94,12 +136,14 @@ function makeSub(def: SubParameterDef, paramCode: string, raw: number, missing: 
     normalized,
     score: !computed || normalized === undefined ? null : normalized * def.marks,
     status,
-    missingFields: [...new Set(missing)],
+    missingFields: missingList,
     formula: def.formula,
     formulaRef: def.formulaRef,
     officiality: def.officiality,
     normalizationNote: def.normalization,
     explanation: def.explanation,
+    steps,
+    flags,
   };
 }
 
@@ -117,14 +161,24 @@ function param(
   subs: SubScore[],
   penalty = 0
 ): ParameterScore {
-  const computed = subs.filter((s) => s.score !== null);
+  // Contribution semantics mirror the absolute module:
+  //   maxContribution = marks × parameterWeight
+  //   contribution    = (score / marks) × maxContribution = score × weight
+  // Summing every sub's contribution reproduces the weighted final score.
+  const subsWithContrib: SubScore[] = subs.map((s) => ({
+    ...s,
+    maxContribution: (s.marks ?? 0) * pdef.weight,
+    contribution:
+      s.score === null ? null : Math.round(s.score * pdef.weight * 100) / 100,
+  }));
+  const computed = subsWithContrib.filter((s) => s.score !== null);
   const computedMarks = computed.reduce((a, s) => a + (s.marks ?? 0), 0);
   const scored = computed.reduce((a, s) => a + (s.score as number), 0);
 
   let status: ParamStatus = "insufficient_data";
   let unweighted: number | null = null;
   if (computed.length > 0 && computedMarks > 0) {
-    status = computed.length === subs.length ? "ok" : "partial";
+    status = computed.length === subsWithContrib.length ? "ok" : "partial";
     unweighted = Math.max(0, Math.min(100, (scored / computedMarks) * 100));
   }
   const weighted = unweighted === null ? 0 : Math.max(0, (unweighted - penalty) * pdef.weight);
@@ -136,7 +190,7 @@ function param(
     weightedScore: weighted,
     unweightedScore: unweighted,
     status,
-    subs,
+    subs: subsWithContrib,
     penalty,
   };
 }
@@ -146,15 +200,25 @@ function param(
 export interface ScoreOptions {
   category: NIRFCategory;
   year: number;
+  /** Sub-parameter keys to deliberately exclude from the score (e.g. the
+   *  absolute-methodology parameters in the relative PDF flow). Excluded subs
+   *  are marked `excluded` with a null score — the parameter is renormalized
+   *  over the included marks. Scoring formulas are unchanged. */
+  excludedSubParameters?: string[];
 }
 
 export function computeScore(m: RawMetrics, opts: ScoreOptions): ScoreResult {
   const ctx = getMethodology(opts.category, opts.year);
   const index = buildSubIndex(ctx);
-  const sub = (key: string, raw: number, missing: string[] = []): SubScore => {
+  const excluded = new Set(opts.excludedSubParameters ?? []);
+  const sub = (key: string, raw: number, missing: string[] = [], steps: Step[] = []): SubScore => {
     const def = index.defs.get(key);
     if (!def) throw new Error(`No sub-parameter definition for "${key}" in methodology`);
-    return makeSub(def, index.params.get(key) ?? "?", raw, missing);
+    const s = makeSub(def, index.params.get(key) ?? "?", raw, missing, steps);
+    if (excluded.has(key)) {
+      return { ...s, excluded: true, score: null };
+    }
+    return s;
   };
   const pdef = (code: ParamCode) =>
     ctx.methodology.parameters.find((p) => p.code === code)!;
@@ -168,7 +232,8 @@ export function computeScore(m: RawMetrics, opts: ScoreOptions): ScoreResult {
   const np = nv(m.phdStudents);
   const totalN = (ok(ne) ? ne : 0) + (ok(np) ? np : 0);
   const ssMissing: string[] = [];
-  const ssPartFill = ok(ne) ? f(ne / (ok(nt) && nt >= 1500 ? nt : 2440)) : NaN;
+  const ssDenom = ok(nt) && nt >= 1500 ? nt : 2440;
+  const ssPartFill = ok(ne) ? f(ne / ssDenom) : NaN;
   const ssPartPhd = ok(np) ? f(np / 515) : NaN;
   if (!ok(ne)) ssMissing.push("enrolledStudents");
   if (!ok(np)) ssMissing.push("phdStudents");
@@ -177,16 +242,59 @@ export function computeScore(m: RawMetrics, opts: ScoreOptions): ScoreResult {
     const scored = (ok(ssPartFill) ? ssPartFill * 15 : 0) + (ok(ssPartPhd) ? ssPartPhd * 5 : 0);
     ssRaw = scored / 20;
   }
+  const ssSteps: Step[] = [];
+  if (ok(ssPartFill)) {
+    ssSteps.push(
+      st(
+        "Student-strength fill-rate (15 marks)",
+        `f(NE ÷ max(sanctionedIntake, 1500)) = f(${ne} ÷ ${ssDenom})`,
+        ssPartFill
+      )
+    );
+  }
+  if (ok(ssPartPhd)) {
+    ssSteps.push(
+      st("PhD fill-rate part (5 marks)", `f(NP ÷ 515) = f(${np} ÷ 515)`, ssPartPhd)
+    );
+  }
+  if (ok(ssRaw)) {
+    ssSteps.push(
+      st(
+        "SS combined (20 marks)",
+        `(${ok(ssPartFill) ? Math.round(ssPartFill * 1000) / 1000 : 0} × 15 + ${
+          ok(ssPartPhd) ? Math.round(ssPartPhd * 1000) / 1000 : 0
+        } × 5) ÷ 20`,
+        ssRaw
+      )
+    );
+  }
 
   // FSR (30 marks): FSR = 30 × min(15 × (F/N), 1) where N = NE + NP
   const F = nv(m.permanentFaculty);
   const N = totalN > 0 ? totalN : (ok(nt) && ok(np) ? nt + np : NaN);
   const fsrMissing: string[] = [];
   let fsrRaw = NaN;
+  const fsrSteps: Step[] = [];
   if (ok(F) && ok(N) && N > 0) {
-    if (F / N < 1 / 50) {
+    const ratio = F / N;
+    fsrSteps.push(st("Faculty-Student Ratio F/N", `F ÷ N = ${F} ÷ ${N}`, ratio));
+    if (ratio < 1 / 50) {
+      fsrSteps.push(
+        st(
+          "Minimum-threshold check (1:50)",
+          `${Math.round(ratio * 10000) / 10000} < 0.02`,
+          "below minimum → valid zero"
+        )
+      );
       fsrRaw = 0; // below minimum threshold (valid data, low ratio)
     } else {
+      fsrSteps.push(
+        st(
+          "FSR scaled (30 marks)",
+          `(15 × ${Math.round(ratio * 10000) / 10000}) × (24.816 ÷ 30), capped at 1`,
+          Math.min(((15 * F) / N) * (24.816 / 30), 1)
+        )
+      );
       fsrRaw = Math.min(((15 * F) / N) * (24.816 / 30), 1);
     }
   } else {
@@ -204,9 +312,20 @@ export function computeScore(m: RawMetrics, opts: ScoreOptions): ScoreResult {
   const fqeMissing: string[] = [];
   let fq = NaN;
   let fe = NaN;
+  const fqeSteps: Step[] = [];
   if (ok(F) && F > 0) {
     if (ok(fwPhd)) {
       const fra = (fwPhd / F) * 100;
+      fqeSteps.push(
+        st("PhD faculty share", `(FWPhD ÷ F) × 100 = (${fwPhd} ÷ ${F}) × 100`, fra >= 95 ? "≥95%" : `${Math.round(fra * 100) / 100}%`)
+      );
+      fqeSteps.push(
+        st(
+          "FQ part (10 marks)",
+          fra >= 95 ? "≥95% → 10" : `10 × (${Math.round(fra * 100) / 100} ÷ 95)`,
+          fra >= 95 ? 10 : 10 * (fra / 95)
+        )
+      );
       fq = fra >= 95 ? 10 : 10 * (fra / 95);
     } else {
       fqeMissing.push("facultyWithPhD");
@@ -217,6 +336,15 @@ export function computeScore(m: RawMetrics, opts: ScoreOptions): ScoreResult {
         const ef1 = f1 / totalExp;
         const ef2 = f2 / totalExp;
         const ef3 = f3 / totalExp;
+        fqeSteps.push(
+          st(
+            "FE part (10 marks)",
+            `3·f(3×${Math.round(ef1 * 1000) / 1000}) + 3·f(3×${
+              Math.round(ef2 * 1000) / 1000
+            }) + 4·f(3×${Math.round(ef3 * 1000) / 1000})`,
+            3 * f(3 * ef1) + 3 * f(3 * ef2) + 4 * f(3 * ef3)
+          )
+        );
         fe = 3 * f(3 * ef1) + 3 * f(3 * ef2) + 4 * f(3 * ef3);
       } else {
         fe = 0; // all-zero experience distribution — valid data, zero credit
@@ -231,6 +359,17 @@ export function computeScore(m: RawMetrics, opts: ScoreOptions): ScoreResult {
   if (ok(fq) || ok(fe)) {
     const scored = (ok(fq) ? fq : 0) + (ok(fe) ? fe : 0);
     fqeRaw = Math.min(scored * 0.9312, 20) / 20;
+  }
+  if (ok(fqeRaw)) {
+    fqeSteps.push(
+      st(
+        "FQE combined (20 marks)",
+        `(${ok(fq) ? Math.round(fq * 1000) / 1000 : 0} + ${
+          ok(fe) ? Math.round(fe * 1000) / 1000 : 0
+        }) × 0.9312, capped 20, ÷ 20`,
+        fqeRaw
+      )
+    );
   }
 
   // FRU (30 marks): Capital (15 marks) + Operational (15 marks) per student —
@@ -249,12 +388,42 @@ export function computeScore(m: RawMetrics, opts: ScoreOptions): ScoreResult {
   if (ok(bcPart) || ok(boPart)) {
     fruRaw = Math.min(((ok(bcPart) ? bcPart : 0) + (ok(boPart) ? boPart : 0)) * 0.978, 30) / 30;
   }
+  const fruSteps: Step[] = [];
+  if (ok(bcPart)) {
+    fruSteps.push(
+      st(
+        "Capital-expenditure part (15 marks)",
+        `f(${bc} ÷ ${totalN} ÷ 150000) × 15`,
+        bcPart
+      )
+    );
+  }
+  if (ok(boPart)) {
+    fruSteps.push(
+      st(
+        "Operational-expenditure part (15 marks)",
+        `f(${bo} ÷ ${totalN} ÷ 175000) × 15`,
+        boPart
+      )
+    );
+  }
+  if (ok(fruRaw)) {
+    fruSteps.push(
+      st(
+        "FRU combined (30 marks)",
+        `(${ok(bcPart) ? Math.round(bcPart * 1000) / 1000 : 0} + ${
+          ok(boPart) ? Math.round(boPart * 1000) / 1000 : 0
+        }) × 0.978, capped 30, ÷ 30`,
+        fruRaw
+      )
+    );
+  }
 
   const tlrSubs: SubScore[] = [
-    sub("ss", ssRaw, ssMissing),
-    sub("fsr", fsrRaw, fsrMissing),
-    sub("fqe", fqeRaw, fqeMissing),
-    sub("fru", fruRaw, fruMissing),
+    sub("ss", ssRaw, ssMissing, ssSteps),
+    sub("fsr", fsrRaw, fsrMissing, fsrSteps),
+    sub("fqe", fqeRaw, fqeMissing, fqeSteps),
+    sub("fru", fruRaw, fruMissing, fruSteps),
   ];
   const tlr = param(pdef("TLR"), tlrSubs);
 
@@ -273,9 +442,34 @@ export function computeScore(m: RawMetrics, opts: ScoreOptions): ScoreResult {
   if (!ok(pubs)) puMissing.push("totalPublications (external source)");
   if (!ok(pret)) puMissing.push("retractedPapers (external source)");
   let puRaw = NaN;
+  const puSteps: Step[] = [];
   if (ok(frq) && frq > 0 && ok(pubs)) {
     const puBase = pubs > 0 ? Math.min(pubs / (frq * 0.35), 1) * (9.72 / 35) : 0;
     const pretPenalty = ok(pret) ? f(pret / frq) : 0;
+    puSteps.push(
+      st(
+        "Publications vs required faculty",
+        `P ÷ FRQ = ${pubs} ÷ ${Math.round(frq * 100) / 100}`,
+        pubs / frq
+      )
+    );
+    puSteps.push(
+      st(
+        "Base (35 marks)",
+        `min(P ÷ FRQ ÷ 0.35, 1) × (9.72 ÷ 35)`,
+        puBase
+      )
+    );
+    if (ok(pret)) {
+      puSteps.push(
+        st(
+          "Retraction penalty",
+          `f(${pret} ÷ ${Math.round(frq * 100) / 100}) × (5 ÷ 35)`,
+          (5 / 35) * pretPenalty
+        )
+      );
+    }
+    puSteps.push(st("PU score", `max(base − penalty, 0)`, Math.max(0, puBase - (5 / 35) * pretPenalty)));
     puRaw = Math.max(0, puBase - (5 / 35) * pretPenalty);
   }
 
@@ -288,9 +482,28 @@ export function computeScore(m: RawMetrics, opts: ScoreOptions): ScoreResult {
   if (!ok(cc)) qpMissing.push("totalCitations (external source)");
   if (!ok(cret)) qpMissing.push("retractedCitations (external source)");
   let qpRaw = NaN;
+  const qpSteps: Step[] = [];
   if (ok(frq) && frq > 0 && ok(cc)) {
     const qpBase = cc > 0 ? Math.min(cc / (frq * 3.2), 1) * (12.39 / 40) : 0;
     const cretPenalty = ok(cret) ? f(cret / frq) : 0;
+    qpSteps.push(
+      st(
+        "Citations vs required faculty",
+        `CC ÷ FRQ = ${cc} ÷ ${Math.round(frq * 100) / 100}`,
+        cc / frq
+      )
+    );
+    qpSteps.push(st("Base (40 marks)", `min(CC ÷ FRQ ÷ 3.2, 1) × (12.39 ÷ 40)`, qpBase));
+    if (ok(cret)) {
+      qpSteps.push(
+        st(
+          "Retraction penalty",
+          `f(${cret} ÷ ${Math.round(frq * 100) / 100}) × (5 ÷ 40)`,
+          (5 / 40) * cretPenalty
+        )
+      );
+    }
+    qpSteps.push(st("QP score", `max(base − penalty, 0)`, Math.max(0, qpBase - (5 / 40) * cretPenalty)));
     qpRaw = Math.max(0, qpBase - (5 / 40) * cretPenalty);
   }
 
@@ -302,10 +515,20 @@ export function computeScore(m: RawMetrics, opts: ScoreOptions): ScoreResult {
   if (!ok(ipg)) iprMissing.push("patentsGranted");
   if (!ok(ipp)) iprMissing.push("patentsFiled");
   let iprRaw = NaN;
+  const iprSteps: Step[] = [];
   if (ok(ipg) || ok(ipp)) {
     const ipgScore = ok(ipg) && ipg > 0 ? ipg * 0.5 : 0;
     const ippScore = ok(ipp) && ipp > 0 ? ipp * 0.1 : 0;
+    if (ok(ipg)) iprSteps.push(st("Patents granted (0.5 each)", `IPG × 0.5 = ${ipg} × 0.5`, ipg * 0.5));
+    if (ok(ipp)) iprSteps.push(st("Patents filed (0.1 each)", `IPP × 0.1 = ${ipp} × 0.1`, ipp * 0.1));
     iprRaw = Math.min((ipgScore + ippScore) * 0.98, 15) / 15;
+    iprSteps.push(
+      st(
+        "IPR combined (15 marks)",
+        `(${Math.round(ipgScore * 1000) / 1000} + ${Math.round(ippScore * 1000) / 1000}) × 0.98, capped 15, ÷ 15`,
+        iprRaw
+      )
+    );
   }
 
   // FPPP (10 marks): Projects and Professional Practice
@@ -316,17 +539,27 @@ export function computeScore(m: RawMetrics, opts: ScoreOptions): ScoreResult {
   if (!ok(rf)) fpppMissing.push("sponsoredResearchAmount");
   if (!ok(cf)) fpppMissing.push("consultancyRevenue");
   let fpppRaw = NaN;
+  const fpppSteps: Step[] = [];
   if (totalN > 0 && (ok(rf) || ok(cf))) {
     const rfScore = ok(rf) ? Math.min((rf / totalN) / 20000, 1) * 7.5 : 0;
     const cfScore = ok(cf) ? Math.min((cf / totalN) / 10000, 1) * 2.5 : 0;
+    if (ok(rf)) fpppSteps.push(st("Sponsored research part (7.5 marks)", `f(${rf} ÷ ${totalN} ÷ 20000) × 7.5`, rfScore));
+    if (ok(cf)) fpppSteps.push(st("Consultancy part (2.5 marks)", `f(${cf} ÷ ${totalN} ÷ 10000) × 2.5`, cfScore));
     fpppRaw = ((rfScore + cfScore) * 0.179) / 10;
+    fpppSteps.push(
+      st(
+        "FPPP combined (10 marks)",
+        `(${Math.round(rfScore * 1000) / 1000} + ${Math.round(cfScore * 1000) / 1000}) × 0.179 ÷ 10`,
+        fpppRaw
+      )
+    );
   }
 
   const rpSubs: SubScore[] = [
-    sub("pu", puRaw, puMissing),
-    sub("qp", qpRaw, qpMissing),
-    sub("ipr", iprRaw, iprMissing),
-    sub("fppp", fpppRaw, fpppMissing),
+    sub("pu", puRaw, puMissing, puSteps),
+    sub("qp", qpRaw, qpMissing, qpSteps),
+    sub("ipr", iprRaw, iprMissing, iprSteps),
+    sub("fppp", fpppRaw, fpppMissing, fpppSteps),
   ];
   const rp = param(pdef("RP"), rpSubs, 0);
 
@@ -338,12 +571,30 @@ export function computeScore(m: RawMetrics, opts: ScoreOptions): ScoreResult {
   const nhs = nv(m.graduatesHigherStudies);
   const gphMissing: string[] = [];
   let gphRaw = NaN;
+  const gphSteps: Step[] = [];
   if (ok(np_) && ok(nhs) && ok(nt) && nt > 0) {
     const placedAvg = np_ / 3;
     const higherAvg = nhs / 3;
     const batchIntake = nt > 500 ? nt / 3 : nt;
     const gphRatio = (placedAvg + higherAvg) / batchIntake;
+    gphSteps.push(st("3-yr placement average", `NP ÷ 3 = ${np_} ÷ 3`, placedAvg));
+    gphSteps.push(st("3-yr higher-studies average", `NHS ÷ 3 = ${nhs} ÷ 3`, higherAvg));
+    gphSteps.push(
+      st(
+        "Relevant batch intake",
+        nt > 500 ? `NT ÷ 3 = ${nt} ÷ 3` : `NT = ${nt}`,
+        batchIntake
+      )
+    );
+    gphSteps.push(st("Combined ratio", `(${placedAvg} + ${higherAvg}) ÷ ${batchIntake}`, gphRatio));
     gphRaw = (Math.min(40 * Math.pow(f(gphRatio / 0.8898), 1.05) * 0.914, 40)) / 40;
+    gphSteps.push(
+      st(
+        "GPH score (40 marks)",
+        `min(40 × f(${Math.round(gphRatio * 10000) / 10000} ÷ 0.8898)^1.05 × 0.914, 40) ÷ 40`,
+        gphRaw
+      )
+    );
   } else {
     if (!ok(np_)) gphMissing.push("graduatesPlaced");
     if (!ok(nhs)) gphMissing.push("graduatesHigherStudies");
@@ -354,11 +605,18 @@ export function computeScore(m: RawMetrics, opts: ScoreOptions): ScoreResult {
   const ng = nv(m.graduatesInTime);
   const gueMissing: string[] = [];
   let gueRaw = NaN;
+  const gueSteps: Step[] = [];
   if (ok(ng) && ok(nt) && nt > 0) {
     const gueAvg = ng / 3;
     const batchIntake = nt > 500 ? nt / 3 : nt;
     const gueRatio = gueAvg / (0.8 * batchIntake);
+    gueSteps.push(st("3-yr passing average", `NG ÷ 3 = ${ng} ÷ 3`, gueAvg));
+    gueSteps.push(
+      st("Relevant batch intake", nt > 500 ? `NT ÷ 3 = ${nt} ÷ 3` : `NT = ${nt}`, batchIntake)
+    );
+    gueSteps.push(st("Ratio vs 80% of intake", `${Math.round(gueAvg * 1000) / 1000} ÷ (0.8 × ${batchIntake})`, gueRatio));
     gueRaw = Math.min(gueRatio, 1);
+    gueSteps.push(st("GUE score (15 marks)", `min(ratio, 1)`, Math.min(gueRatio, 1)));
   } else {
     if (!ok(ng)) gueMissing.push("graduatesInTime");
     if (!ok(nt) || nt <= 0) gueMissing.push("sanctionedIntake");
@@ -368,8 +626,10 @@ export function computeScore(m: RawMetrics, opts: ScoreOptions): ScoreResult {
   const ms = nv(m.medianSalary);
   const gmsMissing: string[] = [];
   let gmsRaw = NaN;
+  const gmsSteps: Step[] = [];
   if (ok(ms)) {
     gmsRaw = Math.min(ms / 1822000, 1);
+    gmsSteps.push(st("Median salary normalized (25 marks)", `min(${ms} ÷ 1,822,000, 1)`, gmsRaw));
   } else {
     gmsMissing.push("medianSalary");
   }
@@ -378,17 +638,19 @@ export function computeScore(m: RawMetrics, opts: ScoreOptions): ScoreResult {
   const nphd = nv(m.phdGraduates);
   const gphdMissing: string[] = [];
   let gphdRaw = NaN;
+  const gphdSteps: Step[] = [];
   if (ok(nphd)) {
     gphdRaw = Math.min(nphd / 3 / 138, 1);
+    gphdSteps.push(st("PhD graduates normalized (20 marks)", `min(${nphd} ÷ 3 ÷ 138, 1)`, gphdRaw));
   } else {
     gphdMissing.push("phdGraduates");
   }
 
   const goSubs: SubScore[] = [
-    sub("gph", gphRaw, gphMissing),
-    sub("gue", gueRaw, gueMissing),
-    sub("gms", gmsRaw, gmsMissing),
-    sub("gphd", gphdRaw, gphdMissing),
+    sub("gph", gphRaw, gphMissing, gphSteps),
+    sub("gue", gueRaw, gueMissing, gueSteps),
+    sub("gms", gmsRaw, gmsMissing, gmsSteps),
+    sub("gphd", gphdRaw, gphdMissing, gphdSteps),
   ];
   const go = param(pdef("GO"), goSubs);
 
@@ -399,8 +661,20 @@ export function computeScore(m: RawMetrics, opts: ScoreOptions): ScoreResult {
   const ooc = nv(m.studentsOtherCountries);
   const rdMissing: string[] = [];
   let rdRaw = NaN;
+  const rdSteps: Step[] = [];
   if (ok(ne) && ne > 0 && ok(oos) && ok(ooc)) {
+    rdSteps.push(st("Other-state share (25 marks)", `25 × (OOS ÷ NE) = 25 × (${oos} ÷ ${ne})`, 25 * (oos / ne)));
+    rdSteps.push(st("Other-country share (5 marks)", `5 × (OOC ÷ NE) = 5 × (${ooc} ÷ ${ne})`, 5 * (ooc / ne)));
     rdRaw = (Math.min((25 * (oos / ne) + 5 * (ooc / ne)) * 0.957, 30)) / 30;
+    rdSteps.push(
+      st(
+        "RD combined (30 marks)",
+        `(${Math.round((25 * (oos / ne)) * 100) / 100} + ${
+          Math.round((5 * (ooc / ne)) * 100) / 100
+        }) × 0.957, capped 30, ÷ 30`,
+        rdRaw
+      )
+    );
   } else {
     if (!ok(ne) || ne <= 0) rdMissing.push("enrolledStudents");
     if (!ok(oos)) rdMissing.push("studentsOtherStates");
@@ -421,16 +695,30 @@ export function computeScore(m: RawMetrics, opts: ScoreOptions): ScoreResult {
   if (!ok(nws)) wdMissing.push("womenStudents");
   if (!ok(nwf)) wdMissing.push("womenFaculty");
   let wdRaw = NaN;
+  const wdSteps: Step[] = [];
+  if (ok(ws)) wdSteps.push(st("Women-student share (14.4 marks)", `f(NSW ÷ 0.56NE) = f(${nws} ÷ ${Math.round(0.56 * ne * 100) / 100})`, Math.round(14.4 * ws * 1000) / 1000));
+  if (ok(wf)) wdSteps.push(st("Women-faculty share (15.6 marks)", `f(NWF ÷ 0.20F) = f(${nwf} ÷ ${Math.round(0.2 * F * 100) / 100})`, Math.round(15.6 * wf * 1000) / 1000));
   if (ok(ws) || (ok(F) && ok(wf))) {
     wdRaw = (Math.min(14.4 * (ok(ws) ? ws : 0) + 15.6 * (ok(wf) ? wf : 0), 30) * 0.815) / 30;
+    wdSteps.push(
+      st(
+        "WD combined (30 marks)",
+        `min(${Math.round(14.4 * (ok(ws) ? ws : 0) * 1000) / 1000} + ${
+          Math.round(15.6 * (ok(wf) ? wf : 0) * 1000) / 1000
+        }, 30) × 0.815 ÷ 30`,
+        wdRaw
+      )
+    );
   }
 
   // ESCS (20 marks): Economically & Socially Challenged Students
   const escs = nv(m.escsStudents);
   const escsMissing: string[] = [];
   let escsRaw = NaN;
+  const escsSteps: Step[] = [];
   if (ok(ne) && ne > 0 && ok(escs)) {
     escsRaw = Math.min(escs / ne / 0.542, 1);
+    escsSteps.push(st("ESCS share (20 marks)", `min(${escs} ÷ ${ne} ÷ 0.542, 1)`, escsRaw));
   } else {
     if (!ok(escs)) escsMissing.push("escsStudents");
     if (!ok(ne) || ne <= 0) escsMissing.push("enrolledStudents");
@@ -440,22 +728,35 @@ export function computeScore(m: RawMetrics, opts: ScoreOptions): ScoreResult {
   // data; an un-supplied value is missing (never silently treated as "no").
   const pcsProvided = typeof m.pcsFacilities === "boolean";
   const pcsRaw = pcsProvided ? (m.pcsFacilities ? 1 : 0) : NaN;
+  const pcsSteps: Step[] = pcsProvided
+    ? [
+        st(
+          "Facilities check (20 marks)",
+          m.pcsFacilities ? "declared present" : "declared absent",
+          m.pcsFacilities ? 1 : 0
+        ),
+      ]
+    : [];
 
   const oiSubs: SubScore[] = [
-    sub("rd", rdRaw, rdMissing),
-    sub("wd", wdRaw, wdMissing),
-    sub("escs", escsRaw, escsMissing),
-    sub("pcs", pcsRaw, pcsProvided ? [] : ["pcsFacilities"]),
+    sub("rd", rdRaw, rdMissing, rdSteps),
+    sub("wd", wdRaw, wdMissing, wdSteps),
+    sub("escs", escsRaw, escsMissing, escsSteps),
+    sub("pcs", pcsRaw, pcsProvided ? [] : ["pcsFacilities"], pcsSteps),
   ];
   const oi = param(pdef("OI"), oiSubs);
 
   // ─── PR (100 marks) ───────────────────────────────────────────
   const prRaw = nv(m.perceptionScore);
+  const prSteps: Step[] = ok(prRaw)
+    ? [st("Perception normalized (100 marks)", `P ÷ 100 = ${prRaw} ÷ 100`, prRaw / 100)]
+    : [];
   const prSubs: SubScore[] = [
     sub(
       "pr",
       ok(prRaw) ? f(prRaw / 100) : NaN,
-      ok(prRaw) ? [] : ["perceptionScore (0-100)"]
+      ok(prRaw) ? [] : ["perceptionScore (0-100)"],
+      prSteps
     ),
   ];
   const pr = param(pdef("PR"), prSubs);

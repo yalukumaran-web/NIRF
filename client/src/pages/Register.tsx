@@ -49,27 +49,41 @@ export default function Register() {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      <div className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-brand-200/70 blur-3xl animate-float" />
+    <div className="relative min-h-screen overflow-hidden bg-[var(--bg-deep)]">
+      <div className="pointer-events-none absolute -left-40 -top-40 h-[500px] w-[500px] rounded-full bg-navy-800/20 blur-3xl animate-float" />
       <div
-        className="pointer-events-none absolute -bottom-40 -right-32 h-[28rem] w-[28rem] rounded-full bg-mint-200/80 blur-3xl animate-float"
-        style={{ animationDelay: "1.6s" }}
+        className="pointer-events-none absolute -bottom-48 -right-40 h-[600px] w-[600px] rounded-full bg-brand-700/10 blur-3xl animate-float"
+        style={{ animationDelay: "2s" }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(16,37,63,1) 1px, transparent 1px), linear-gradient(90deg, rgba(16,37,63,1) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
       />
 
       <div className="relative mx-auto flex min-h-screen w-full max-w-md items-center px-6 py-12">
         <form
           onSubmit={submit}
-          className="card w-full space-y-5 p-7 shadow-lift sm:p-9 animate-fade-up"
+          className="w-full space-y-5 rounded-2xl border border-[var(--surface-4)] bg-[var(--surface-5)] p-8 shadow-lift animate-fade-up"
         >
           <Brand />
+
           <div>
-            <h2 className="text-2xl font-extrabold tracking-tight text-brand-900">
+            <h2
+              className="text-2xl font-extrabold tracking-tight text-[var(--text-1)]"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
+            >
               Institution Registration
             </h2>
-            <p className="mt-1 text-sm text-brand-900/55">
+            <p className="mt-1.5 text-sm text-[var(--text-faint)]">
               Create an account to upload credentials and compute scores
             </p>
           </div>
+
+          <div className="h-px bg-[var(--border)]" />
 
           <div>
             <label className="label" htmlFor="institutionName">
@@ -79,7 +93,7 @@ export default function Register() {
               id="institutionName"
               className="input"
               type="text"
-              placeholder="Indian Institute of Technology, Madras"
+              placeholder="e.g. Sri Krishna College of Engineering"
               value={form.institutionName}
               onChange={(e) => set("institutionName", e.target.value)}
               required
@@ -97,7 +111,7 @@ export default function Register() {
               onChange={(e) => set("category", e.target.value)}
             >
               {CATEGORIES.map((c) => (
-                <option key={c} value={c}>
+                <option key={c} value={c} className="bg-[var(--surface-5)]">
                   {c.charAt(0).toUpperCase() + c.slice(1)}
                 </option>
               ))}
@@ -105,11 +119,11 @@ export default function Register() {
           </div>
 
           <div>
-            <label className="label" htmlFor="email">
-              Email
+            <label className="label" htmlFor="reg-email">
+              Email address
             </label>
             <input
-              id="email"
+              id="reg-email"
               className="input"
               type="email"
               placeholder="you@institution.edu"
@@ -120,21 +134,25 @@ export default function Register() {
           </div>
 
           <div>
-            <label className="label" htmlFor="password">
+            <label className="label" htmlFor="reg-password">
               Password
             </label>
             <input
-              id="password"
+              id="reg-password"
               className="input"
               type="password"
-              placeholder="Min 6 characters"
+              placeholder="Minimum 6 characters"
               value={form.password}
               onChange={(e) => set("password", e.target.value)}
               required
             />
           </div>
 
-          {error && <p className="text-sm font-medium text-rose-600">{error}</p>}
+          {error && (
+            <p className="rounded-lg border border-[var(--chip-danger-border)] bg-[var(--chip-danger-bg)] px-3 py-2 text-sm font-medium text-[var(--chip-danger-text)]">
+              {error}
+            </p>
+          )}
 
           <button
             type="submit"
@@ -142,14 +160,14 @@ export default function Register() {
             className={cn("btn-primary w-full py-3")}
           >
             <Icon path={ICON.check} className="h-4 w-4" />
-            {submitting ? "Creating account…" : "Create account"}
+            {submitting ? "Creating account…" : "Create Account"}
           </button>
 
-          <p className="text-sm text-center text-brand-900/50">
+          <p className="text-sm text-center text-[var(--text-fainter)]">
             Already have an account?{" "}
             <Link
               to="/login"
-              className="font-semibold text-brand-600 hover:text-brand-800"
+              className="font-semibold text-brand-600 hover:text-brand-500 transition-colors"
             >
               Sign in
             </Link>

@@ -23,7 +23,12 @@ export async function saveMetrics(req: Request, res: Response) {
   }
   try {
     await upsertRawMetrics(inst.id, parsed.data);
-    const score = await computeAndSave(inst.id, parsed.data, inst.category as NIRFCategory);
+    const score = await computeAndSave(
+      inst.id,
+      parsed.data,
+      inst.category as NIRFCategory,
+      parsed.data.excludedSubParameters
+    );
     return res.status(201).json({
       institution: inst,
       category: inst.category,

@@ -1,6 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { detectPdfFormat, splitPageMarkers } from "../services/pdfFormatDetector";
 import { extractNirfMetrics } from "../services/nirfExtractor";
+import { absoluteInputFromExtracted } from "../services/nirf/absolute/adapters";
+import { computeFsr } from "../services/nirf/absolute/engine";
 
 describe("splitPageMarkers", () => {
   it("splits combined page-tagged text into chunks", () => {
@@ -208,6 +210,38 @@ describe("corrected extraction semantics", () => {
     expect(out.fields?.permanentFaculty?.source).toBe("estimated_default");
     expect(out.fields?.permanentFaculty?.basis).toContain("Number of faculty members entered");
     expect(out.fields?.facultyWithPhD?.source).toBe("missing");
+  });
+
+  it("extracts clean program labels and the far-right Appointment Type column", () => {
+    const out = extractNirfMetrics(realisticCreds());
+    // labels must NOT carry the trailing numeric cells
+    expect((out.studentStrengthRows ?? []).map((r) => r.label)).toEqual([
+      "UG [4 Years Program(s)]",
+      "PG [2 Year Program(s)]",
+    ]);
+    // appointment type is read from the last field (after the date columns)
+    const roster = out.facultyRoster ?? [];
+    expect(roster.map((r) => r.appointmentType)).toEqual(["Regular", "Regular", "Regular", "Regular"]);
+    // working flag + month experience survive verbatim
+    expect(roster[0].working).toBe(true);
+    expect(roster[0].experienceMonths).toBe(220);
+  });
+
+  it("computes FSR from the extracted payload (roster + student-strength + PhD)", () => {
+    const out = extractNirfMetrics(realisticCreds());
+    const input = absoluteInputFromExtracted(out);
+    const r = computeFsr(input);
+    // F = Alice (working, Regular, 220m) + Bob (working, Regular, 90m) = 2
+    //   Carol (not working) & Dave (not working) excluded
+    // NT = 2700 (UG4) + 500 (PG2) = 3200; Np = 100 + 20 = 120; N = 3320
+    // N/F = 3320/2 = 1660 > 50 → official override: FSR = 0
+    const finalF = r.steps.find((s) => s.label === "F — permanent faculty count");
+    expect(finalF?.result).toBe(2);
+    const N = r.steps.find((s) => s.label === "N — total students (FSR denominator)");
+    expect(N?.result).toBe(3320);
+    expect(r.status).toBe("computed");
+    expect(r.score).toBe(0);
+    expect(r.steps.some((s) => s.label.startsWith("override N/F > 50"))).toBe(true);
   });
 
   it("keeps a consistent nested fields / flat view", () => {
