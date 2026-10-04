@@ -13,6 +13,7 @@ interface NavItem {
 const NAV: NavItem[] = [
   { to: "/relative", label: "Relative", icon: ICON.chart, end: true },
   { to: "/absolute", label: "Absolute", icon: ICON.calculator },
+  { to: "/diff", label: "Diff Calculator", icon: ICON.check },
 ];
 
 const SOCIALS = [
@@ -177,6 +178,7 @@ export default function AppShell({
                 {[
                   { label: "Relative Predictor", to: "/relative" },
                   { label: "Absolute Calculator", to: "/absolute" },
+                  { label: "Diff Calculator", to: "/diff" },
                 ].map((l) => (
                   <div key={l.to}>
                     <Link

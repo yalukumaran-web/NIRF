@@ -23,5 +23,9 @@
     "cheerio": "^1.2.0",
     "exceljs": "^4.4.0",
     "googlethis": "^1.8.0"
+  },
+  "devDependencies": {
+    "jimp": "^1.6.1",
+    "tesseract.js": "^5.1.1"
   }
 }

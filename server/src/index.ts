@@ -14,6 +14,7 @@ import calculationRoutes from "./routes/calculationRoutes";
 import mlRoutes from "./routes/mlRoutes";
 import absoluteRoutes from "./routes/absoluteRoutes";
 import relativeRoutes from "./routes/relativeRoutes";
+import diffRoutes from "./routes/diffRoutes";
 import publicRoutes from "./routes/publicRoutes";
 
 const app = express();
@@ -26,6 +27,10 @@ app.use("/api", publicRoutes);
 // Public, stateless absolute scoring — must mount before routers that apply
 // a blanket `router.use(requireAuth)` at their /api mount point.
 app.use("/api/absolute", absoluteRoutes);
+// Diff calculator — compares the absolute engine against the official values
+// read from `expected_output/`. ADDITIVE: it reuses the absolute engine as-is
+// and never modifies its business logic.
+app.use("/api/diff", diffRoutes);
 // Public, stateless relative-parameter prediction module — independent from
 // the Absolute (FSR/GUE/PCS/FQE/WD/RD) pipeline. ADDITIVE only.
 app.use("/api/relative", relativeRoutes);

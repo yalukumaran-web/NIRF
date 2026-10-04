@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import Upload from "./pages/Upload";
 import AbsoluteCalculator from "./pages/AbsoluteCalculator";
 import RelativeCalculator from "./pages/RelativeCalculator";
+import DiffCalculator from "./pages/DiffCalculator";
 
 function ProtectedLayout() {
   const { token } = useAuth();
@@ -30,6 +31,7 @@ export default function App() {
               <Route path="/" element={<Navigate to="/relative" replace />} />
               <Route path="/upload" element={<Upload />} />
               <Route path="/absolute" element={<AbsoluteCalculator />} />
+              <Route path="/diff" element={<DiffCalculator />} />
               <Route path="/relative" element={<RelativeCalculator />} />
             </Route>
             <Route path="*" element={<Navigate to="/relative" replace />} />
