@@ -1,0 +1,50 @@
+{
+  "ESCS": {
+    "family": "Isotonic",
+    "strategy": "pooled",
+    "cv_mae": 0.8276776197695443,
+    "cv_rmse": 1.145751182516729,
+    "cv_r2": 0.867016235979051,
+    "cv_n": 90
+  },
+  "GPHD": {
+    "family": "PreviousYear",
+    "strategy": "per_year",
+    "cv_mae": 0.7848387096774193,
+    "cv_rmse": 1.0247176374783151,
+    "cv_r2": 0.9485448499729372,
+    "cv_n": 93
+  },
+  "GMS": {
+    "family": "PreviousYear",
+    "strategy": "per_year",
+    "cv_mae": 0.41010752688172053,
+    "cv_rmse": 0.5646085331439162,
+    "cv_r2": 0.9791202747327346,
+    "cv_n": 93
+  },
+  "FPPP": {
+    "family": "PreviousYear",
+    "strategy": "per_year",
+    "cv_mae": 0.27499999999999997,
+    "cv_rmse": 0.4639293424462487,
+    "cv_r2": 0.9477889519794658,
+    "cv_n": 92
+  },
+  "SS": {
+    "family": "PreviousYear",
+    "strategy": "per_year",
+    "cv_mae": 0.6802150537634409,
+    "cv_rmse": 0.9542344789726555,
+    "cv_r2": 0.9301034120745735,
+    "cv_n": 93
+  },
+  "FRU": {
+    "family": "AdditiveLog",
+    "strategy": "per_year",
+    "cv_mae": 0.9866890568178789,
+    "cv_rmse": 1.4467937027501176,
+    "cv_r2": 0.9240380145175541,
+    "cv_n": 89
+  }
+}

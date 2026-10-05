@@ -1,0 +1,77 @@
+{
+  "2023": {
+    "max_marks": {
+      "ss": 20,
+      "fsr": 30,
+      "fqe": 20,
+      "fru": 30,
+      "pu": 35,
+      "qp": 40,
+      "ipr": 15,
+      "fppp": 10,
+      "gph": 40,
+      "gue": 15,
+      "gms": 25,
+      "gphd": 20,
+      "rd": 30,
+      "wd": 30,
+      "escs": 20,
+      "pcs": 20,
+      "pr": 100
+    },
+    "max_marks_source": "canonical_2023_total_row",
+    "graphs_read": 100,
+    "graphs_total": 100,
+    "mean_label_match": 17
+  },
+  "2024": {
+    "max_marks": {
+      "ss": 20,
+      "fsr": 30,
+      "fqe": 20,
+      "fru": 30,
+      "pu": 35,
+      "qp": 40,
+      "ipr": 15,
+      "fppp": 10,
+      "gph": 40,
+      "gue": 15,
+      "gms": 25,
+      "gphd": 20,
+      "rd": 30,
+      "wd": 30,
+      "escs": 20,
+      "pcs": 20,
+      "pr": 100
+    },
+    "max_marks_source": "canonical_2023_total_row",
+    "graphs_read": 100,
+    "graphs_total": 100,
+    "mean_label_match": 17
+  },
+  "2025": {
+    "max_marks": {
+      "ss": 20,
+      "fsr": 30,
+      "fqe": 20,
+      "fru": 30,
+      "pu": 35,
+      "qp": 40,
+      "ipr": 15,
+      "fppp": 10,
+      "gph": 40,
+      "gue": 15,
+      "gms": 25,
+      "gphd": 20,
+      "rd": 30,
+      "wd": 30,
+      "escs": 20,
+      "pcs": 20,
+      "pr": 100
+    },
+    "max_marks_source": "canonical_2023_total_row",
+    "graphs_read": 90,
+    "graphs_total": 90,
+    "mean_label_match": 17
+  }
+}

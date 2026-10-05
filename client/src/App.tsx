@@ -8,6 +8,7 @@ import Upload from "./pages/Upload";
 import AbsoluteCalculator from "./pages/AbsoluteCalculator";
 import RelativeCalculator from "./pages/RelativeCalculator";
 import DiffCalculator from "./pages/DiffCalculator";
+import ModelPredictor from "./pages/ModelPredictor";
 
 function ProtectedLayout() {
   const { token } = useAuth();
@@ -33,6 +34,7 @@ export default function App() {
               <Route path="/absolute" element={<AbsoluteCalculator />} />
               <Route path="/diff" element={<DiffCalculator />} />
               <Route path="/relative" element={<RelativeCalculator />} />
+              <Route path="/model-predict" element={<ModelPredictor />} />
             </Route>
             <Route path="*" element={<Navigate to="/relative" replace />} />
           </Routes>

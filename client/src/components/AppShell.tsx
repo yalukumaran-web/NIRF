@@ -14,6 +14,7 @@ const NAV: NavItem[] = [
   { to: "/relative", label: "Relative", icon: ICON.chart, end: true },
   { to: "/absolute", label: "Absolute", icon: ICON.calculator },
   { to: "/diff", label: "Diff Calculator", icon: ICON.check },
+  { to: "/model-predict", label: "ModelForRelativeParameter", icon: ICON.sparkles },
 ];
 
 const SOCIALS = [

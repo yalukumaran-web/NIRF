@@ -1,0 +1,31 @@
+parameter,institute_id,name,rank,actual_abs,predicted_abs,abs_error
+ESCS,IR-E-U-0197,National Institute of Technology Srinagar,73.0,13.8,11.23,2.57
+ESCS,IR-E-U-0284,Maulana Azad National Institute of Technology,81.0,5.97,8.352,2.382
+ESCS,IR-E-U-0108,Jamia Millia Islamia,24.0,9.02,11.23,2.21
+ESCS,IR-E-U-1257,COEP Technological University,90.0,5.51,7.568,2.058
+ESCS,IR-E-U-0575,Jadavpur University,18.0,5.69,7.576,1.886
+GPHD,IR-E-U-0739,Madan Mohan Malaviya University of Technology,60.0,7.9,3.86,4.04
+GPHD,IR-E-U-0308,Institute of Chemical Technology,41.0,6.88,9.04,2.16
+GPHD,IR-E-U-0098,Delhi Technological University,30.0,8.92,6.81,2.11
+GPHD,IR-E-U-0436,Amrita Vishwa Vidyapeetham,23.0,4.91,3.09,1.82
+GPHD,IR-E-U-0560,Indian Institute of Technology Roorkee,6.0,12.78,14.44,1.66
+GMS,IR-E-U-0739,Madan Mohan Malaviya University of Technology,60.0,14.35,11.42,2.93
+GMS,IR-E-U-0042,University of Hyderabad,74.0,14.51,12.18,2.33
+GMS,IR-E-U-0108,Jamia Millia Islamia,24.0,15.64,13.69,1.95
+GMS,IR-E-U-0357,National Institute of Technology Rourkela,13.0,16.93,15.17,1.76
+GMS,IR-E-U-0622,National Institute of Technology Delhi,65.0,18.65,17.27,1.38
+FPPP,IR-E-U-0064,Indian Institute of Technology Patna,19.0,7.25,3.83,3.42
+FPPP,IR-E-U-0946,Indian Institute of Technology Bhilai,72.0,8.69,5.54,3.15
+FPPP,IR-E-U-0906,Indian Institute of Technology Jammu,56.0,6.36,3.29,3.07
+FPPP,IR-E-U-0139,Indian Institute of Technology Gandhinagar,25.0,8.61,5.69,2.92
+FPPP,IR-E-U-0306,Indian Institute of Technology Bombay,3.0,9.93,7.06,2.87
+SS,IR-E-U-0497,Amity University,37.0,13.6,16.47,2.87
+SS,IR-E-I-1441,Saveetha Institute of Medical and Technical Sciences,45.0,16.02,13.18,2.84
+SS,IR-E-U-0184,Indian Institute of Technology Mandi,26.0,12.45,9.79,2.66
+SS,IR-E-U-0043,"Vignan's Foundation for Science, Technology and Research",80.0,17.3,14.65,2.65
+SS,IR-E-U-0373,Chitkara University,89.0,13.34,15.47,2.13
+FRU,IR-E-U-0042,University of Hyderabad,74.0,14.38,22.859,8.479
+FRU,IR-E-U-0384,Sant Longowal Institute of Engineering & Technology,79.0,22.29,17.824,4.466
+FRU,IR-E-U-0584,"Indian Institute of Engineering Science and Technology, Shibpur",54.0,16.17,19.609,3.439
+FRU,IR-E-U-0389,Banasthali Vidyapith,71.0,11.34,14.63,3.29
+FRU,IR-E-U-0619,National Institute of Technology Meghalaya,83.0,17.72,20.935,3.215
